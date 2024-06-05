@@ -179,7 +179,7 @@ class User extends Resource
             ])->displayUsingLabels()->filterable()->sortable(),
 
             //Asesor
-            BelongsTo::make('Asesor', 'agent', 'App\Nova\User')->exceptOnForms()->sortable(),
+            BelongsTo::make('Asesor', 'agent', 'App\Nova\User')->exceptOnForms()->sortable()->filterable()->searchable(),
 
             Select::make('Asesor', 'agent_id')->options(function(){
 
@@ -226,6 +226,8 @@ class User extends Resource
             HasMany::make('Actividad', 'sessions', Session::class)->hideFromDetail(fn () => $this->sessions->isEmpty()),
 
             HasMany::make('Datos de acceso enviados', 'emails', 'App\Nova\Email')->hideFromDetail(fn () => $this->emails->isEmpty()),
+
+            HasMany::make('Clientes', 'clients', 'App\Nova\User')->hideFromDetail(fn () => $this->clients->isEmpty()),
 
         ];
     }

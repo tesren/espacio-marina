@@ -84,7 +84,7 @@ class Unit extends Resource
 
             Number::make('Piso', 'floor')->rules('required')->min(0)->max(35)->sortable(),
 
-            Number::make('Precio', 'price')->rules('required')->min(0)->step(0.01)->sortable()->showOnPreview()
+            Number::make('Precio', 'price')->rules('required')->min(0)->step(0.001)->sortable()->showOnPreview()
             ->displayUsing(
                 function($value){
                     return '$'.number_format($value,2).' '.$this->currency;

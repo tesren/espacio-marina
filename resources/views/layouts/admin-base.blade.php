@@ -13,23 +13,19 @@
 
         @yield('titles')
 
-        <link rel="preload" as="style" href="{{ asset('css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 
-        <link rel="preload" as="style" href="{{ asset('css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/all.min.css') }}">
 
-        <link rel="preload" as="style" href="{{ asset('css/fancybox.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/fancybox.min.css') }}">
 
-        <link rel="preload" as="style" href="{{ asset('css/splide.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
 
-        <link rel="preload" as="style" href="{{ asset('css/espacio-styles.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/espacio-styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/espacio-styles-v1.css') }}">
 
         @include('components.favicon')
 
+        @livewireStyles
     </head>
 
     <body>
@@ -44,6 +40,9 @@
 
             <div class="col-12 col-lg-11 px-0">
                 {{ $slot }}
+
+                {{-- Footer --}}
+                @include('livewire.components.admin-footer')
             </div>
 
         </main>

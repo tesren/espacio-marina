@@ -96,4 +96,14 @@ class User extends Authenticatable
         return $this->hasMany(Email::class);
     }
 
+    /**
+     * Get all of the clients for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function clients()
+    {
+        return $this->hasMany(User::class, 'agent_id');
+    }
+
 }

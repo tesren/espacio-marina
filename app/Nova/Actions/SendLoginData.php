@@ -40,7 +40,7 @@ class SendLoginData extends Action
                         if( isset($user->agent->email) ){
                             $email->cc($user->agent->email);
                         }
-                        $email->bcc( ['javier@domusvallarta.com', 'miriam@domusvallarta.com'] );
+                        $email->bcc( ['javier@domusvallarta.com', 'hugo@domusvallarta.com'] );
 
                         //$email = Mail::to('erick@punto401.com');
 

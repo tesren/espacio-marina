@@ -7,21 +7,30 @@
 
     <section class="row position-relative mb-6 px-0">
 
-        <div class="col-12 col-lg-9 px-0">
-            <img src="{{asset('img/espacio-marina-home.webp')}}" alt="Fachada Espacio Marina" class="w-100" style="height: 70vh; object-fit:cover; object-position:top;">
+        <div class="col-11 col-lg-9 px-0">
+            <picture>
+                <!-- Imagen para pantallas de escritorio -->
+                <source media="(min-width: 768px)" srcset="{{asset('img/espacio-marina-home.webp')}}">
+              
+                <!-- Imagen para pantallas de teléfono -->
+                <source media="(max-width: 767px)" srcset="{{ asset('img/fachada-atras-alberca.webp') }}">
+              
+                <!-- Fallback para navegadores que no soportan <picture> -->
+                <img src="{{asset('img/espacio-marina-home.webp')}}" alt="Fachada Espacio Marina" class="w-100" style="height: 70vh; object-fit:cover; object-position:top;">
+            </picture>
         </div>
 
-        <div class="col-12 col-lg-3 px-0">
+        <div class="col-1 col-lg-3 px-0">
             <img src="{{asset('img/blue-colors.webp')}}" alt="" class="w-100" style="height: 70vh; object-fit:cover;">
         </div>
 
         <div class="bg-black-gradient"></div>
 
-        <div class="row justify-content-end position-absolute bottom-0 start-0 h-100">
+        <div class="row justify-content-center justify-content-lg-end position-absolute bottom-0 start-0 h-100">
 
-            <div class="col-12 col-lg-4 m-5 align-self-center bg-white p-5 text-darkblue">
+            <div class="col-12 col-lg-4 m-5 align-self-center p-5 text-darkblue" style="background-color: rgba(255, 255, 255, 0.85);">
                 <h1 class="fw-bold fs-2">
-                    {{__('Buenos días')}}, {{ auth()->user()->name }} 
+                    {{__('Hola')}}, {{ auth()->user()->name }} 
                 </h1>
                 <div class="fw-bold fs-5 mb-3">{{__('Un lugar creado para ti')}}.</div>
                 <p>{{__('Enamórate de Espacio Marina & Golf, un desarrollo ideal para relajarte, salir de la ciudad y disfrutar momentos especiales con tu familia en las hermosas playas de Puerto Vallarta.')}}</p>
@@ -46,7 +55,7 @@
             <p>{{__('Disfruta de tus vacaciones en la mejor zona de Puerto Vallarta, una ubicación privilegiada a sólo 400 m de la playa y a 5 min del aeropuerto.')}}</p>
         </div>
 
-        <div class="col-12 col-lg-4 text-center">
+        <div class="col-12 col-lg-4 text-start text-lg-center">
             <div>Playa Puerto Vallarta <span class="ms-3">Club de Golf Marina</span></div>
             <div>Marina Vallarta <span class="mx-3">Aeropuerto</span> Starbucks</div>
             <div>La Terraza di Roma <span class="ms-3">Viña & Salvatore’s Wine Bar</span></div>
@@ -133,8 +142,10 @@
                         @endphp
                         
                         <li class="splide__slide text-center px-3">
-                            <img src="{{ $blueprints[0]->getUrl('medium') }}" alt="Tipo de Unidad Tridenta" class="w-100" style="object-fit: contain;">
-                            <div class="fs-5 fw-bold mt-2">{{ $type->name }} - {{__('Opcion')}} {{$type->option}}</div>
+                            <div class="fs-5 fw-bold mt-2 position-relative z-3">{{ $type->name }} - {{$type->option}}</div>
+                            @isset($blueprints[0])
+                                <img src="{{ $blueprints[0]->getUrl('medium') }}" alt="Tipo de Unidad Tridenta" class="w-100" style="object-fit: contain;">
+                            @endisset
                         </li>
             
                     @endforeach                  
@@ -155,16 +166,16 @@
             <p class="fs-5">{{__('Vistas increibles en todos lados, elige la mejor opción que tenemos para ti.')}}</p>
         </div>
         
-        <div class="col-1 align-self-center text-center">
+        <div class="col-1 align-self-center text-center d-none d-lg-block">
             <img src="{{asset('img/icons/ocean.png')}}" alt="" class="w-100 mb-1">
             <div class="fw-bold">{{__('Vista al mar')}}</div>
         </div>
 
-        <div class="col-10 col-lg-9">
+        <div class="col-12 col-lg-9">
             <img src="{{asset('img/master-plan.webp')}}" alt="Master Plan de Espacio Marina & Golf" class="w-100">
         </div>
 
-        <div class="col-1 align-self-center text-center">
+        <div class="col-1 align-self-center text-center d-none d-lg-block">
             <img src="{{asset('img/icons/golf.png')}}" alt="" class="w-100 mb-1">
             <div class="fw-bold">{{__('Vista al campo de Golf')}}</div>
         </div>
@@ -179,5 +190,34 @@
 
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1061.259475496731!2d-105.26063120297846!3d20.666436713417106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842145d623ba3ed5%3A0x859f087aedd0da99!2sEspacio%20Marina%20%26%20Golf!5e0!3m2!1ses-419!2smx!4v1717431581145!5m2!1ses-419!2smx" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
+
+
+    @script
+        <script>
+            // This Javascript will get executed every time this component is loaded onto the page...
+            Fancybox.bind("[data-fancybox]", {
+                Hash: false,
+            });
+
+            let splide_unitTypes = document.getElementById('splide_unitTypes');
+
+            if(splide_unitTypes){
+
+                splide_unitTypes = new Splide( '#splide_unitTypes', {
+                    type   : 'loop',
+                    perPage: 4,
+                    rewind : true,
+                    perMove: 1,
+                    breakpoints: {
+                        640: {
+                            perPage: 1,
+                        },
+                    }
+                } );
+                
+                splide_unitTypes.mount();
+            }
+        </script>
+    @endscript
 
 </div>

@@ -28,7 +28,7 @@ class UnitType extends Resource
      * @var string
      */
     public function title(){
-        return $this->name.' - '.$this->bathrooms.' BA';
+        return $this->name.' '.$this->option;
     }
     /**
      * The columns that should be searched.
@@ -69,9 +69,15 @@ class UnitType extends Resource
             Text::make('Nombre', 'name')->rules('required', 'max:50')->sortable(),
 
             Select::make('Opción', 'option')->options([
-                '1' => 'Opción 1',
-                '2' => 'Opción 2',
-            ])->displayUsingLabels(),
+                'Opción 1' => 'Opción 1',
+                'Opción 2' => 'Opción 2',
+                'Garden House Opción 1' => 'Garden House Opción 1',
+                'Garden House Opción 2' => 'Garden House Opción 2',
+                'Villa A' => 'Villa A',
+                'Villa B' => 'Villa B',
+                'Villa B Plus' => 'Villa B Plus',
+
+            ])->displayUsingLabels()->nullable(),
 
             Number::make('Recámaras', 'bedrooms')->rules('required')->min(0)->max(15)->help('Dejar en 0 si es Loft o Studio')->sortable(),
             Number::make('Cuartos Flex', 'flexrooms')->rules('nullable')->min(0)->max(15)->sortable(),

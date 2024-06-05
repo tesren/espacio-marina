@@ -17,27 +17,3 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
     }
     
 }); */
-
-Fancybox.bind("[data-fancybox]", {
-    // Your custom options
-});
-
-let splide_unitTypes = document.getElementById('splide_unitTypes');
-
-if(splide_unitTypes){
-
-    splide_unitTypes = new Splide( '#splide_unitTypes', {
-        type   : 'loop',
-        perPage: 4,
-        rewind : true,
-        perMove: 1,
-        breakpoints: {
-            640: {
-                perPage: 1,
-            },
-        }
-    } );
-      
-    splide_unitTypes.mount();
-}
-
