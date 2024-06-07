@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Support\Facades\App;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
@@ -88,6 +89,79 @@ class Unit extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('unitgallery');
+    }
+
+
+    protected function getInteriorConstAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getExteriorConstAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getExtraExteriorConstAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getPatioAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getRooftopAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getGardenAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getStorageAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
+    }
+
+    protected function getConstTotalAttribute($value)
+    {
+        if (App::isLocale('en')) {
+            return (round($value * 10.764, 2));
+        }else{
+            return $value;
+        }
     }
 
 }

@@ -32,7 +32,7 @@
                         </li>
                     
                         <li>
-                            <a href="{{route('dashboard.inventory')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.inventory') active @endif" wire:navigate>
+                            <a href="{{route('dashboard.oceanview')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.oceanview') active @endif" wire:navigate>
                                 <i class="fa-solid fa-building me-2"></i>
                                 {{__('Inventario')}}
                             </a>
@@ -58,7 +58,27 @@
                                 {{__('Mi perfil')}}
                             </a>
                         </li>
+
+                        @if ( auth()->user()->role != 'client' )
+                            <li>
+                                <a href="{{url('/nova')}}" class="nav-link" target="_blank" rel="noopener noreferrer">
+                                    <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>
+                                    {{__('Panel de administración')}}
+                                </a>
+                            </li>
+                        @endif
+
                     </ul>
+
+                    <hr>
+
+                    <div class="text-center">
+                        
+                        <button wire:click="logout" class="btn link-light">
+                            <i class="fa-solid fa-right-from-bracket"></i> {{__('Cerrar Sesión')}}
+                        </button>
+                        
+                    </div>
 
                 </div>
             </div>
@@ -93,7 +113,7 @@
                 </li>
             
                 <li>
-                    <a href="{{route('dashboard.inventory')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.inventory') active @endif" wire:navigate>
+                    <a href="{{route('dashboard.oceanview')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.oceanview') active @endif" wire:navigate>
                         <i class="fa-solid fa-building me-2"></i>
                         {{__('Inventario')}}
                     </a>
@@ -119,6 +139,15 @@
                         {{__('Mi perfil')}}
                     </a>
                 </li>
+
+                @if ( auth()->user()->role != 'client' )
+                    <li>
+                        <a href="{{url('/nova')}}" class="nav-link" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-solid fa-arrow-up-right-from-square me-2"></i>
+                            {{__('Panel de administración')}}
+                        </a>
+                    </li>
+                @endif
         
             </ul>
 

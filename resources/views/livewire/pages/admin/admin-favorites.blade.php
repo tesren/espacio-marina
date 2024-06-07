@@ -26,11 +26,13 @@
                         $badgeBg = 'bg-danger';
                     }
                 @endphp
-                <div class="card mb-3 shadow-5 rounded-3">
+                <div class="card mb-3 shadow rounded-3">
                     <div class="row g-0">
 
                         <div class="col-lg-4 align-self-center">
-                            <img src="{{ $blueprint[0]->getUrl('medium') }}" class="w-100 rounded-3 p-3" alt="Planos de la unidad {{$unit->name}} de Tridenta Towers">
+                            @if ( isset($blueprint[0]) )
+                                <img src="{{ $blueprint[0]->getUrl('medium') }}" class="w-100 rounded-3 p-3" alt="Planos de la unidad {{$unit->name}} de Espacio Marina">
+                            @endif
                         </div>
 
                         <div class="col-lg-8">
@@ -38,7 +40,7 @@
 
                                 <div class="position-absolute top-0 end-0 m-3 d-flex justify-content-start justify-content-lg-end">
                                     <div class="badge {{$badgeBg}} rounded-pill mb-2 fs-5 fw-light align-self-center">
-                                        {{$unit->status}}
+                                        {{__($unit->status)}}
                                     </div>
                         
                                     <div class="">
@@ -85,7 +87,7 @@
             @endforeach
 
             <div class="text-center my-5">
-                <a href="{{route('dashboard.inventory')}}" class="btn btn-blue" wire:navigate>
+                <a href="{{route('dashboard.oceanview')}}" class="btn btn-blue" wire:navigate>
                     {{__('Ver todo el inventario')}}
                 </a>    
             </div>
@@ -94,7 +96,7 @@
 
             <h1>{{__('Aún no tienes unidades guardadas')}}</h1>
             <p>{{__('Visita nuestro inventario para ver todas las unidades')}}</p>
-            <a href="{{route('dashboard.inventory')}}" class="btn btn-blue" wire:navigate>
+            <a href="{{route('dashboard.oceanview')}}" class="btn btn-blue" wire:navigate>
                 {{__('Ver Inventario')}}
             </a>
 

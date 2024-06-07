@@ -37,15 +37,26 @@
                     <div class="text-secondary">{{$user->email}}</div>
                     <p>{{__('Aquí puedes ver y modificar tus datos personales')}}</p>
         
-                    <form action="" method="post">
+                    <form wire:submit="updateProfile">
         
                         <label for="user_name">{{__('Nombre')}}</label>
-                        <input type="text" class="contact-input mb-3" name="user_name" value="{{$user->name}}">
+                        <input type="text" class="contact-input mb-3" wire:model="user_name">
         
                         <label for="user_phone">{{__('Teléfono')}}</label>
-                        <input type="text" class="contact-input mb-3" name="user_phone" value="{{$user->phone}}">
+                        <input type="text" class="contact-input mb-3" wire:model="user_phone">
         
-                        <button type="submit" class="btn btn-blue">{{__('Guardar Cambios')}}</button>
+                        <button type="submit" class="btn btn-blue d-inline">
+                            <i class="fa-solid fa-spin fa-circle-notch" wire:loading></i>
+                            {{__('Guardar Cambios')}}
+                        </button>
+
+                        @if (session('message'))
+                            <div class="d-inline text-success fw-bold ms-1">
+                                <i class="fa-solid fa-check"></i> {{__( session('message') )}}
+                            </div>
+                        @endif
+                        
+
                     </form>
         
                 </div>

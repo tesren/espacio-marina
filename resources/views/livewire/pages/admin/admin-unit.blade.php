@@ -16,7 +16,7 @@
             @if ( isset($unit_type_gallery[0]) )
                 <img src="{{$unit_type_gallery[0]->getUrl('large')}}" alt="Galería unidad {{$unit->name}} - Espacio Marina & Golf" class="w-100 unit-imgs" data-fancybox="gallery">
             @else
-                <img src="{{asset('/img/interior-room.webp')}}" alt="Galería unidad {{$unit->name}} - Espacio Marina & Golf" class="w-100 unit-imgs" data-fancybox="gallery">
+                <img src="{{asset('/img/interior-room-1.webp')}}" alt="Galería unidad {{$unit->name}} - Espacio Marina & Golf" class="w-100 unit-imgs" data-fancybox="gallery">
                 <img src="{{asset('/img/sala.jpg')}}" alt="Galería unidad {{$unit->name}} - Espacio Marina & Golf" class="d-none" data-fancybox="gallery">
             @endif
         </div>
@@ -152,7 +152,7 @@
                 </div>
 
                 <div class="mx-3">
-                    <i class="fa-solid fa-building"></i> {{$unit->section->name}}
+                    <i class="fa-solid fa-building"></i> {{__($unit->section->name)}}
                 </div>
 
             </div>
@@ -167,35 +167,35 @@
                     <i class="fa-solid fa-people-roof"></i> {{__('Terraza Techada')}}: {{$unit->exterior_const}} {{__('m²')}}
                 </div>
 
-                @isset($unit->extra_exterior_const)
+                @if($unit->extra_exterior_const != 0)
                     <div class="col-6 col-lg-4 mb-3">
                         <i class="fa-solid fa-maximize"></i> {{__('Terraza Extendida')}}: {{$unit->extra_exterior_const}} {{__('m²')}}
                     </div>
-                @endisset
+                @endif
                 
-                @isset($unit->patio)
+                @if($unit->patio != 0)
                     <div class="col-6 col-lg-4 mb-3">
                         <i class="fa-solid fa-maximize"></i> {{__('Patio')}}: {{$unit->patio}} {{__('m²')}}
                     </div>
-                @endisset
+                @endif
 
-                @isset($unit->rooftop)
+                @if($unit->rooftop != 0)
                     <div class="col-6 col-lg-4 mb-3">
                         <i class="fa-solid fa-umbrella-beach"></i> {{__('Rooftop')}}: {{$unit->rooftop}} {{__('m²')}}
                     </div>
-                @endisset
+                @endif
 
-                @isset($unit->garden)
+                @if($unit->garden != 0)
                     <div class="col-6 col-lg-4 mb-3">
                         <i class="fa-solid fa-seedling"></i> {{__('Jardín')}}: {{$unit->garden}} {{__('m²')}}
                     </div>
-                @endisset
+                @endif
 
-                @isset($unit->storage)
+                @if($unit->storage != 0)
                     <div class="col-6 col-lg-4 mb-3">
                         <i class="fa-solid fa-warehouse"></i> {{__('Bodega')}}: {{$unit->storage}} {{__('m²')}}
                     </div>
-                @endisset
+                @endif
 
                 <div class="col-6 col-lg-4 mb-3">
                     <i class="fa-solid fa-house-chimney"></i> {{__('Total')}}: {{$unit->const_total}} {{__('m²')}}
@@ -203,7 +203,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-lg-3 align-self-center text-center position-relative">
+        <div class="col-12 col-lg-4 align-self-center text-center position-relative">
 
             @if ($unit->price != 0 and $unit->status == 'Disponible')
                 <div class="fs-5 fw-light badge bg-darkblue rounded-pill">{{__('Precio')}}</div>

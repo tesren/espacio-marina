@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Unit;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
 
 class AdminUnit extends Component
 {
@@ -34,6 +35,9 @@ class AdminUnit extends Component
     
     public function render()
     {
+        $lang = auth()->user()->lang;
+        App::setLocale($lang);
+
         return view('livewire.pages.admin.admin-unit')->layout('layouts.admin-base');
     }
 }

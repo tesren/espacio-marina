@@ -7,17 +7,18 @@
 
     <section class="row position-relative mb-6 px-0">
 
-        <div class="col-11 col-lg-9 px-0">
+        <div class="col-11 col-lg-9 px-0 position-relative">
             <picture>
                 <!-- Imagen para pantallas de escritorio -->
-                <source media="(min-width: 768px)" srcset="{{asset('img/espacio-marina-home.webp')}}">
+                <source media="(min-width: 768px)" srcset="{{asset('/img/facha-golf-detras.webp')}}">
               
                 <!-- Imagen para pantallas de teléfono -->
                 <source media="(max-width: 767px)" srcset="{{ asset('img/fachada-atras-alberca.webp') }}">
               
                 <!-- Fallback para navegadores que no soportan <picture> -->
-                <img src="{{asset('img/espacio-marina-home.webp')}}" alt="Fachada Espacio Marina" class="w-100" style="height: 70vh; object-fit:cover; object-position:top;">
+                <img src="{{asset('/img/facha-golf-detras.webp')}}" alt="Fachada Espacio Marina" class="w-100" style="height: 70vh; object-fit:cover; object-position:top;">
             </picture>
+
         </div>
 
         <div class="col-1 col-lg-3 px-0">
@@ -36,7 +37,7 @@
                 <p>{{__('Enamórate de Espacio Marina & Golf, un desarrollo ideal para relajarte, salir de la ciudad y disfrutar momentos especiales con tu familia en las hermosas playas de Puerto Vallarta.')}}</p>
                 
                 <div class="mb-3">{{__('¡Mira las unidades que tenemos para ti!')}}</div>
-                <a href="{{route('dashboard.inventory')}}" wire:navigate class="btn btn-blue w-100">
+                <a href="{{route('dashboard.oceanview')}}" wire:navigate class="btn btn-blue w-100">
                     {{__('Ver inventario')}}
                 </a>
             </div>
@@ -56,8 +57,8 @@
         </div>
 
         <div class="col-12 col-lg-4 text-start text-lg-center">
-            <div>Playa Puerto Vallarta <span class="ms-3">Club de Golf Marina</span></div>
-            <div>Marina Vallarta <span class="mx-3">Aeropuerto</span> Starbucks</div>
+            <div>{{__('Playa')}} Puerto Vallarta <span class="ms-3">Club de Golf Marina</span></div>
+            <div>Marina Vallarta <span class="mx-3">{{__('Aeropuerto')}}</span> Starbucks</div>
             <div>La Terraza di Roma <span class="ms-3">Viña & Salvatore’s Wine Bar</span></div>
         </div>
 
@@ -82,7 +83,7 @@
 
         <div class="col-12 col-lg-3 px-0">
             <img src="{{asset('img/terraza-vista-al-mar.jpg')}}" alt="Vista de Espacio Marina" class="w-100 p-1 object-fit-cover" data-fancybox="gallery" style="height: 25vh;">
-            <img src="{{asset('img/recamara.jpg')}}" alt="Recámaras de Espacio Marina" class="w-100 p-1 object-fit-cover" data-fancybox="gallery" style="height: 26vh;">
+            <img src="{{asset('img/interior-room-1.webp')}}" alt="Recámaras de Espacio Marina" class="w-100 p-1 object-fit-cover" data-fancybox="gallery" style="height: 26vh;">
         </div>
 
     </div>
@@ -96,7 +97,7 @@
 
             <div class="col-6 col-lg-2">
                 <img src="{{asset('img/icons/building.png')}}" alt="" class="w-100 px-3 px-lg-5">
-                <div class="fw-bold my-3">210 {{__('Unidades')}}</div>
+                <div class="fw-bold my-3">210 {{__('Condominios')}}</div>
             </div>
 
             <div class="col-6 col-lg-2">
@@ -142,9 +143,9 @@
                         @endphp
                         
                         <li class="splide__slide text-center px-3">
-                            <div class="fs-5 fw-bold mt-2 position-relative z-3">{{ $type->name }} - {{$type->option}}</div>
+                            <div class="fs-5 fw-bold mt-2 position-relative z-3">{{ $type->name }} - {{__($type->option)}}</div>
                             @isset($blueprints[0])
-                                <img src="{{ $blueprints[0]->getUrl('medium') }}" alt="Tipo de Unidad Tridenta" class="w-100" style="object-fit: contain;">
+                                <img src="{{ $blueprints[0]->getUrl('medium') }}" alt="Tipo de Unidad Espacio Marina" class="w-100" style="object-fit: contain;">
                             @endisset
                         </li>
             
@@ -177,7 +178,7 @@
 
         <div class="col-1 align-self-center text-center d-none d-lg-block">
             <img src="{{asset('img/icons/golf.png')}}" alt="" class="w-100 mb-1">
-            <div class="fw-bold">{{__('Vista al campo de Golf')}}</div>
+            <div class="fw-bold">{{__('Vista al campo de golf')}}</div>
         </div>
 
 

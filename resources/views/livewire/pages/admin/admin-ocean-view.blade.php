@@ -2,7 +2,7 @@
     {{-- Because she competes with no one, no one can compete with her. --}}
 
     @section('titles')
-        <title>{{__('Inventario')}} - Espacio Marina</title>
+        <title>{{__('Inventario Vista al Mar')}} - Espacio Marina</title>
     @endsection
 
     <div class="position-relative mb-5">
@@ -114,7 +114,8 @@
                     
     
                     <button type="submit" class="btn btn-blue rounded-end-2 col-12 col-lg-1" aria-label="{{__('Buscar')}}">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-solid fa-magnifying-glass" wire:loading.remove></i>
+                        <i class="fa-solid fa-spin fa-circle-notch" wire:loading></i>
                     </button>
                 </div>
             </form>
@@ -125,72 +126,41 @@
         <div class="row">
 
             <div class="col-12 col-lg-11 px-0 order-2 order-lg-1">
-                <div class="tab-content" id="pills-tabContent">
                     
-                    {{-- Vista al Mar --}}
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                        
-                        <div class="position-relative p-0">
-                            <img src="{{asset('img/fachada-vista-mar.webp')}}" alt="Inventario disponible de Espacio Marina" class="w-100 shadow-5">
-            
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="position-absolute start-0 top-0 px-0" viewBox="0 0 1920 980">
-            
-                                @foreach ($oceanview_units as $unit)
-                                    <a href="{{route('dashboard.unit', ['name' => $unit->name])}}" wire:navigate class="text-decoration-none link-light" title="{{$unit->name}}">
-
-                                        <polygon class="{{ strtolower($unit->status) }}-class" points="{{$unit->shape->points ?? '0,0'}}"></polygon>
-                                        
-                                        @php
-                                            if($unit->section_id == 4){
-                                                $font_size = 13;
-                                            }
-                                            else{
-                                                $font_size = 17;
-                                            }
-                                        @endphp
-
-                                        <text x="{{$unit->shape->text_x ?? 0;}}" y="{{$unit->shape->text_y ?? 0; }}"
-                                            font-size="{{$font_size}}" font-weight="light" fill="#fff" >
+                {{-- Vista al Mar --}}
                     
-                                            <tspan class="fw-semibold">{{$unit->name}}</tspan>
-                                            
-                                        </text>
-                                    </a>  
+                <div class="position-relative p-0">
+                    <img src="{{asset('img/fachada-vista-mar.webp')}}" alt="Inventario disponible de Espacio Marina" class="w-100 shadow-5">
+    
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="position-absolute start-0 top-0 px-0" viewBox="0 0 1920 980">
+    
+                        @foreach ($oceanview_units as $unit)
+                            <a href="{{route('dashboard.unit', ['name' => $unit->name])}}" wire:navigate class="text-decoration-none link-light" title="{{$unit->name}}">
+
+                                <polygon class="{{ strtolower($unit->status) }}-class" points="{{$unit->shape->points ?? '0,0'}}"></polygon>
+                                
+                                @php
+                                    if($unit->section_id == 4){
+                                        $font_size = 13;
+                                    }
+                                    else{
+                                        $font_size = 17;
+                                    }
+                                @endphp
+
+                                <text x="{{$unit->shape->text_x ?? 0;}}" y="{{$unit->shape->text_y ?? 0; }}"
+                                    font-size="{{$font_size}}" font-weight="light" fill="#fff" >
+            
+                                    <tspan class="fw-semibold">{{$unit->name}}</tspan>
                                     
-                                @endforeach
-                            </svg>
-            
-                        </div>
-
-                    </div>
-
-                    {{-- Vista al Golf --}}
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-                        <div class="position-relative p-0">
-                            <img src="{{asset('img/fachada-vista-golf.webp')}}" alt="Inventario disponible de Espacio Marina" class="w-100 shadow-5">
-            
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="position-absolute start-0 top-0 px-0" viewBox="0 0 1921 980">
-            
-                                @foreach ($golfview_units as $unit)
-                                    <a href="{{route('dashboard.unit', ['name' => $unit->name])}}" wire:navigate class="text-decoration-none link-light">
-
-                                        <polygon class="{{ strtolower($unit->status) }}-class" points="{{$unit->shape->points ?? '0,0'}}"></polygon>
-                                        
-                                        <text x="{{$unit->shape->text_x ?? 0;}}" y="{{$unit->shape->text_y ?? 0; }}"
-                                            font-size="16" font-weight="light" fill="#fff">
-                    
-                                            <tspan class="fw-semibold">{{$unit->name}}</tspan>
-                                            
-                                        </text>
-                                    </a>  
-                                    
-                                @endforeach
-                            </svg>
-            
-                        </div>
-                    </div>
-
+                                </text>
+                            </a>  
+                            
+                        @endforeach
+                    </svg>
+    
                 </div>
+
             </div>
 
             {{-- Navegación Torres --}}
@@ -198,17 +168,17 @@
                 <ul class="nav nav-pills nav-inventory mb-3 justify-content-center justify-content-lg-start" id="pills-tab" role="tablist">
 
                     <li class="nav-item me-4 me-lg-0" role="presentation">
-                      <button class="nav-link active inventory-btns" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                      <button class="nav-link active inventory-btns"  type="button"  aria-selected="true">
                         <img src="{{asset('img/icons/ocean.png')}}" width="50px" alt="">
                         <div class="d-block d-lg-none mt-2 text-blue">{{__('Vista al mar')}}</div>
                       </button>
                     </li>
         
                     <li class="nav-item" role="presentation">
-                      <button class="nav-link inventory-btns" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                      <a href="{{route('dashboard.golfview')}}" class="nav-link inventory-btns" wire:navigate>
                         <img src="{{asset('img/icons/golf.png')}}" width="50px" alt="">
                         <div class="d-block d-lg-none mt-2 text-blue">{{__('Vista al Golf')}}</div>
-                      </button>
+                      </a>
                     </li>
         
                 </ul>

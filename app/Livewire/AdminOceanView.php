@@ -4,50 +4,27 @@ namespace App\Livewire;
 
 use App\Models\Unit;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Illuminate\Support\Facades\App;
 
-class AdminSearch extends Component
+class AdminOceanView extends Component
 {
-    use WithPagination;
-
     public $search_status = 0;
     public $floor = 0;
     public $bedrooms = 0;
     public $tower = 0;
-    public $view = 0;
     public $min_price = 1;
     public $max_price = 9999999999;
+    public $oceanview_units;
 
+
+    public function mount(){
+        $this->oceanview_units = Unit::whereIn('section_id', [1,4])->get();
+
+    }
 
     public function search(){
 
-        $this->resetPage();
-    }
-
-    public function saveUnit($unitID){
-
-        $unit = Unit::findOrFail( $unitID );
-        $unit->users()->attach( auth()->user()->id );
-        $unit->save();
-
-    }
-
-    public function removeUnit($unitID){
-
-        $unit = Unit::findOrFail( $unitID );
-        $unit->users()->detach( auth()->user()->id );
-        $unit->save();
-
-    }
-
-    public function render()
-    {
-
-        $lang = auth()->user()->lang;
-        App::setLocale($lang);
-
-        $units = Unit::where('price', '>' ,$this->min_price)->where('price','<', $this->max_price)->where('status', '!=', 'Vendida');
+        $units = Unit::where('price', '>' ,$this->min_price)->where('price','<', $this->max_price);
 
         if( $this->floor != 0 ){
             $units = $units->where('floor', $this->floor);
@@ -61,13 +38,6 @@ class AdminSearch extends Component
             }            
         }
 
-        if($this->view != 0){
-            if ($this->view == 'Mar') {
-                $units = $units->whereIn('section_id', [1,4] );
-            } else {
-                $units = $units->whereIn('section_id', [3,2] );
-            }            
-        }
 
         if( $this->bedrooms != 0 ){
 
@@ -95,8 +65,17 @@ class AdminSearch extends Component
             
         }
 
-        $units = $units->orderBy('status', 'desc')->paginate(12);
-        
-        return view('livewire.pages.admin.admin-search', compact('units') )->layout('layouts.admin-base');
+
+        $this->oceanview_units = $units->whereIn('section_id', [1,4])->get();
+
+        //$this->resetPage();
+    }
+
+    public function render()
+    {
+        $lang = auth()->user()->lang;
+        App::setLocale($lang);
+
+        return view('livewire.pages.admin.admin-ocean-view')->layout('layouts.admin-base');
     }
 }

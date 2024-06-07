@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Unit;
 use Livewire\Component;
+use Illuminate\Support\Facades\App;
 
 class AdminFavorites extends Component
 {
@@ -17,6 +18,9 @@ class AdminFavorites extends Component
     
     public function render()
     {
+        $lang = auth()->user()->lang;
+        App::setLocale($lang);
+
         $units = auth()->user()->savedUnits;
 
         return view('livewire.pages.admin.admin-favorites', compact('units'))->layout('layouts.admin-base');
