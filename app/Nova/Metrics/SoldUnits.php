@@ -27,12 +27,12 @@ class SoldUnits extends Value
     public function ranges()
     {
         return [
-            7 => __('7 Días'),
-            30 => __('30 Días'),
-            60 => __('60 Días'),
-            90 => __('3 Meses'),
-            182 => __('6 Meses'),
-            365 => __('1 Año'),
+            7 => '7 ' . __('Días'),
+            30 => '30 ' . __('Días'),
+            60 => '60 ' . __('Días'),
+            90 => '3 ' . __('Meses'),
+            182 => '6 ' . __('Meses'),
+            365 => '1 ' . __('Año'),
         ];
     }
 
@@ -53,6 +53,6 @@ class SoldUnits extends Value
      */
     public function name()
     {
-        return 'Unidades Vendidas';
+        return __('Unidades Vendidas');
     }
 }

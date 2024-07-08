@@ -3,7 +3,7 @@ import './bootstrap';
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
-/* document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
     var whatsappLink = document.getElementById('whatsapp');
 
     if(whatsappLink){
@@ -16,4 +16,18 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
         tooltip.show();
     }
     
-}); */
+});
+
+document.addEventListener('livewire:init', () => {
+    Livewire.on('change-lang', (event) => {
+        
+        const bodyElement = document.querySelector('body');
+
+            // Verifica si el elemento existe
+            if (bodyElement) {
+                // Elimina el elemento
+                bodyElement.removeAttribute('style');
+            }
+
+    });
+ });

@@ -15,5 +15,5 @@
 <meta name="msapplication-TileColor" content="#2C4769">
 <meta name="msapplication-TileImage" content={{ asset("/img/favicon/ms-icon-144x144.png")}}>
 <meta name="theme-color" content="#2C4769">
-<link rel="shortcut icon" href="{{ asset('img/favicon.ico')}}" type="image/x-icon">
-<link rel="icon" href="{{ asset('img/favicon.ico')}}" type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico')}}" type="image/x-icon">
+<link rel="icon" href="{{ asset('img/favicon/favicon.ico')}}" type="image/x-icon">

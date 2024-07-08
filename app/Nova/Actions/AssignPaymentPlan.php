@@ -43,7 +43,7 @@ class AssignPaymentPlan extends Action
             
         }
 
-        return Action::message('Planes de Pagos Asignados');
+        return Action::message(__('Planes de Pagos Asignados'));
     }
 
     /**
@@ -55,7 +55,7 @@ class AssignPaymentPlan extends Action
     public function fields(NovaRequest $request)
     {
         return [
-            Select::make('Plan de pago', 'paymentPlan')->options(
+            Select::make(__('Plan de pago'), 'paymentPlan')->options(
                 function(){
                     $plans = PaymentPlan::all();
                     $arrayPlans = [];

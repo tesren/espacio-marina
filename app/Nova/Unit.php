@@ -76,48 +76,52 @@ class Unit extends Resource
         return [
             ID::make()->sortable()->hideFromDetail()->hideFromIndex(),
 
-            Text::make('Unidad', 'name')->rules('required', 'max:50', 'regex:/^[A-Za-z0-9\s]+$/')->sortable()->placeholder('Nombre o número de la unidad')->showOnPreview(),
+            Text::make(__('Unidad'), 'name')->rules('required', 'max:50', 'regex:/^[A-Za-z0-9\s]+$/')->sortable()->placeholder('Nombre o número de la unidad')->showOnPreview(),
 
             //BelongsTo::make('Torre', 'tower', Tower::class)->withoutTrashed()->rules('required')->filterable()->showCreateRelationButton(),
 
-            BelongsTo::make('Torre y Sección', 'section', Section::class)->withoutTrashed()->rules('required')->filterable(),
+            BelongsTo::make(__('Torre y Vista'), 'section', Section::class)->withoutTrashed()->rules('required')->filterable(),
 
-            Number::make('Piso', 'floor')->rules('required')->min(0)->max(35)->sortable(),
+            Number::make(__('Piso'), 'floor')->rules('required')->min(0)->max(35)->sortable(),
 
-            Number::make('Precio', 'price')->rules('required')->min(0)->step(0.001)->sortable()->showOnPreview()
+            Number::make(__('Precio'), 'price')->rules('required')->min(0)->step(0.001)->sortable()->showOnPreview()
             ->displayUsing(
                 function($value){
                     return '$'.number_format($value,2).' '.$this->currency;
                 }
             ),
 
-            Select::make('Moneda', 'currency')->options([
+            Select::make(__('Moneda'), 'currency')->options([
                 'USD' => 'USD',
                 'MXN' => 'MXN',
             ])->rules('required')->default('USD')->onlyOnForms(),
 
-            Select::make('Estatus', 'status')->options([
-                'Disponible' => 'Disponible',
-                'Apartada' => 'Apartada',
-                'Vendida' => 'Vendida',
-            ])->rules('required')->default('Disponible')->onlyOnForms()->filterable(),
+            Select::make(__('Estatus'), 'status')->options([
+                'Disponible' => __('Disponible'),
+                'Apartada' => __('Apartada'),
+                'Vendida' => __('Vendida'),
+            ])->rules('required')->default('Disponible')->onlyOnForms()->filterable()->displayUsingLabels(),
 
-            Badge::make('Estatus', 'status')->map([
+            Badge::make(__('Estatus'), 'status')->map([
                 'Vendida' => 'danger',
                 'Disponible' => 'success',
                 'Apartada' => 'warning',
+            ])->labels([
+                'Disponible' => __('Disponible'),
+                'Apartada' => __('Apartada'),
+                'Vendida' => __('Vendida'),
             ])->sortable()->showOnPreview(),
 
-            URL::make('Link de Youtube', 'youtube_link')->rules('nullable')->hideFromIndex()->help('Pega el link de Youtube de la vista de la unidad')
+            URL::make(__('Link de Youtube'), 'youtube_link')->rules('nullable')->hideFromIndex()->help(__('Pega el link de Youtube de la vista de la unidad'))
             ->displayUsing(
                 function($value){
                     return $this->value;
                 }
             ),
 
-            Tag::make('Planes de pago', 'paymentPlans', PaymentPlan::class)->hideFromIndex(),
+            Tag::make(__('Planes de pago'), 'paymentPlans', PaymentPlan::class)->hideFromIndex(),
 
-            Images::make('Galería', 'unitgallery')->hideFromIndex()/*->rules('required')*/->enableExistingMedia()->showStatistics()
+            Images::make(__('Galería'), 'unitgallery')->hideFromIndex()/*->rules('required')*/->enableExistingMedia()->showStatistics()
             ->singleImageRules('dimensions:max_width=2000, max:2048')
             ->setFileName(function($originalFilename, $extension, $model){
 
@@ -134,13 +138,13 @@ class Unit extends Resource
 
             }),
 
-            Image::make('Vista de la unidad', 'view_path')->disk('media')->help('Suba la imagen de la vista de la unidad'),
+            Image::make(__('Vista de la unidad'), 'view_path')->disk('media')->help('Suba la imagen de la vista de la unidad'),
 
-            Panel::make('Medidas', $this->sizesFields()),
+            Panel::make(__('Medidas'), $this->sizesFields()),
 
-            HasMany::make('Clientes que Guardaron esta Unidad', 'users', User::class),
+            HasMany::make(__('Clientes que Guardaron esta Unidad'), 'users', User::class),
 
-            HasOne::make('Polígono', 'shape', Shape::class),
+            HasOne::make(__('Polígono'), 'shape', Shape::class),
      ];
     }
 
@@ -153,7 +157,7 @@ class Unit extends Resource
     protected function sizesFields()
     {
         return [
-            BelongsTo::make('Tipo de Unidad', 'unitType', UnitType::class)->withoutTrashed()->rules('required')->filterable()->showOnPreview(),
+            BelongsTo::make(__('Tipo de Unidad'), 'unitType', UnitType::class)->withoutTrashed()->rules('required')->filterable()->showOnPreview(),
 
             Number::make('Interior', 'interior_const')->hideFromIndex()->placeholder('Metros cuadrados del interior')->min(0)->max(99999)->rules('required')->step(0.01)
             ->displayUsing(
@@ -172,7 +176,7 @@ class Unit extends Resource
                 }
             ),
 
-            Number::make('Terraza techada', 'exterior_const')->hideFromIndex()->placeholder('Metros cuadrados de la terraza')->min(0)->max(99999)->rules('required')->step(0.01)
+            Number::make(__('Terraza techada'), 'exterior_const')->hideFromIndex()->placeholder('Metros cuadrados de la terraza')->min(0)->max(99999)->rules('required')->step(0.01)
             ->displayUsing(
                 function($value){
                     return $value.' m²';
@@ -189,7 +193,7 @@ class Unit extends Resource
                 }
             ),
 
-            Number::make('Terraza extendida', 'extra_exterior_const')->hideFromIndex()->placeholder('Metros cuadrados de la terraza extendida')->min(0)->max(99999)->nullable()->step(0.01)
+            Number::make(__('Terraza extendida'), 'extra_exterior_const')->hideFromIndex()->placeholder('Metros cuadrados de la terraza extendida')->min(0)->max(99999)->nullable()->step(0.01)
             ->displayUsing(
                 function($value){
                     return $value.' m²';
@@ -207,20 +211,20 @@ class Unit extends Resource
                     return $value.' m²';
                 }
             ),
-            Number::make('Jardín', 'garden')->hideFromIndex()->placeholder('Metros cuadrados del jardín')->min(0)->max(99999)->nullable()->step(0.01)
+            Number::make(__('Jardín'), 'garden')->hideFromIndex()->placeholder('Metros cuadrados del jardín')->min(0)->max(99999)->nullable()->step(0.01)
             ->displayUsing(
                 function($value){
                     return $value.' m²';
                 }
             ), 
-            Number::make('Bodega', 'storage')->hideFromIndex()->placeholder('Metros cuadrados de la bodega')->min(0)->max(99999)->nullable()->step(0.01)->default(3)
+            Number::make(__('Bodega'), 'storage')->hideFromIndex()->placeholder('Metros cuadrados de la bodega')->min(0)->max(99999)->nullable()->step(0.01)->default(3)
             ->displayUsing(
                 function($value){
                     return $value.' m²';
                 }
             ),
 
-            Number::make('Const. Total', 'const_total')->sortable()->placeholder('Metros cuadrados totales')->min(0)->max(99999)->rules('required')->step(0.01)
+            Number::make(__('Const. Total'), 'const_total')->sortable()->placeholder('Metros cuadrados totales')->min(0)->max(99999)->rules('required')->step(0.01)
             ->displayUsing(
                 function($value){
                     return $value.' m²';

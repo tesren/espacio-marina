@@ -13,7 +13,6 @@
   "Forgot Password": "Forgot Password",
   "Forgot your password?": "Forgot your password?",
   "Log In": "Log In",
-  "Logout": "Logout",
   "Password": "Password",
   "Remember me": "Remember me",
   "Resources": "Resources",
@@ -466,5 +465,6 @@
   "Uploading files... (:current/:total)": "Uploading files... (:current/:total)",
   "Remove": "Remove",
   "Uploading": "Uploading",
-  "The image could not be loaded.": "The image could not be loaded."
+  "The image could not be loaded.": "The image could not be loaded.",
+  "Logout":"Logout"
 }

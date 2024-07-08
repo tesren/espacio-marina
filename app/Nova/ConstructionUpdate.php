@@ -69,9 +69,9 @@ class ConstructionUpdate extends Resource
     {
         return [
             ID::make()->sortable(),
-            Date::make('Fecha del Avance', 'date')->required()->sortable(),
-            Text::make('Descripción', 'description')->help('Pequeña descripción de lo que se hizo en la obra de construcción')->nullable(),
-            Text::make('Description', 'description_en')->help('Pequeña descripción de lo que se hizo en la obra de construcción en INGLÉS')->nullable(),
+            Date::make(__('Fecha del Avance'), 'date')->required()->sortable(),
+            Text::make('Descripción', 'description')->help(__('Pequeña descripción de lo que se hizo en la obra de construcción en Español'))->nullable(),
+            Text::make('Description', 'description_en')->help(__('Pequeña descripción de lo que se hizo en la obra de construcción en Inglés'))->nullable(),
 
             new Panel('Imágenes y Video', $this->imageFields()),
         ];
@@ -80,10 +80,10 @@ class ConstructionUpdate extends Resource
     protected function imageFields() {
 
         return [
-            Image::make('Portada', 'portrait_path')->hideFromIndex()->creationRules('required')->disk('media'),
-            URL::make('Video Youtube', 'video_link')->help('Pega el link del video de Youtube')->displayUsing(fn () => "Ver Video"),
+            Image::make(__('Portada'), 'portrait_path')->hideFromIndex()->creationRules('required')->disk('media'),
+            URL::make(__('Video de Youtube'), 'video_link')->help('Pega el link del video de Youtube')->displayUsing(fn () => "Ver Video"),
 
-            Images::make('Galería', 'gallery_construction')->hideFromIndex()->enableExistingMedia(),
+            Images::make(__('Galería'), 'gallery_construction')->hideFromIndex()->enableExistingMedia(),
         ];
 
     }

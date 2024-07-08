@@ -115,7 +115,7 @@ class User extends Resource
 
             Gravatar::make()->maxWidth(50),
 
-            Text::make('Nombre Completo', 'name')
+            Text::make(__('Nombre Completo'), 'name')
                 ->sortable()
                 ->rules('required', 'max:255')
                 ->showWhenPeeking(),
@@ -127,16 +127,16 @@ class User extends Resource
                 ->updateRules('unique:users,email,{{resourceId}}')
                 ->showWhenPeeking(),
 
-            Number::make('Teléfono', 'phone')->hideFromIndex()->nullable()->min(0),
+            Number::make(__('Teléfono'), 'phone')->hideFromIndex()->nullable()->min(0),
 
-            Select::make('Lenguaje', 'lang')->options([
-                'es' => 'Español',
-                'en' => 'Inglés',
+            Select::make(__('Lenguaje'), 'lang')->options([
+                'es' => __('Español'),
+                'en' => __('Inglés'),
             ])->displayUsingLabels()->sortable()/* ->default('es') */->rules('required'),
 
-            Country::make('País', 'country_code')->hideFromIndex()->searchable()->nullable()->default('MX'),
+            Country::make(__('País'), 'country_code')->hideFromIndex()->searchable()->nullable()->default('MX'),
 
-            Text::make('Contraseña', 'password')
+            Text::make(__('Contraseña'), 'password')
                 ->onlyOnForms()->hideWhenUpdating()->help('La contraseña se genera automaticament, NO CAMBIAR')
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults())
@@ -166,22 +166,22 @@ class User extends Resource
                     }
                 ),
 
-            Password::make('Contraseña', 'password')
+            Password::make(__('Contraseña'), 'password')
                 ->onlyOnForms()->hideWhenCreating()
                 ->creationRules('required', Rules\Password::defaults())
                 ->updateRules('nullable', Rules\Password::defaults()),
 
-            Select::make('Rol', 'role')->options([
-                'client' => 'Cliente',
-                'agent' => 'Asesor Inmobiliario',
-                'admin' => 'Administrador del sistema',
-                'superadmin' => 'Super Admin',
+            Select::make(__('Rol'), 'role')->options([
+                'client' => __('Cliente'),
+                'agent' => __('Asesor Inmobiliario'),
+                'admin' => __('Administrador del sistema'),
+                'superadmin' => __('Super Admin'),
             ])->displayUsingLabels()->filterable()->sortable(),
 
             //Asesor
-            BelongsTo::make('Asesor', 'agent', 'App\Nova\User')->exceptOnForms()->sortable()->filterable()->searchable(),
+            BelongsTo::make(__('Asesor'), 'agent', 'App\Nova\User')->exceptOnForms()->sortable()->filterable()->searchable(),
 
-            Select::make('Asesor', 'agent_id')->options(function(){
+            Select::make(__('Asesor'), 'agent_id')->options(function(){
 
                 $agents = User::where('role', 'agent')->get();
                 $agentsArray = [];
@@ -206,7 +206,7 @@ class User extends Resource
                 }
             ),
 
-            Textarea::make('Notas', 'notes')->maxlength(5000)->enforceMaxlength()->nullable()
+            Textarea::make(__('Notas'), 'notes')->maxlength(5000)->enforceMaxlength()->nullable()
             ->dependsOn(
                 ['role'],
                 function (Textarea $field, NovaRequest $request, FormData $formData) {
@@ -219,15 +219,15 @@ class User extends Resource
                 }
             ),
 
-            BelongsToMany::make('Unidades Guardadas', 'savedUnits', Unit::class)->hideFromDetail(fn () => $this->savedUnits->isEmpty()),
+            BelongsToMany::make(__('Unidades Guardadas'), 'savedUnits', Unit::class)->hideFromDetail(fn () => $this->savedUnits->isEmpty()),
 
-            HasMany::make('Mensajes', 'messages', PrivateMessage::class)->hideFromDetail(fn () => $this->messages->isEmpty()),
+            HasMany::make(__('Mensajes'), 'messages', PrivateMessage::class)->hideFromDetail(fn () => $this->messages->isEmpty()),
 
-            HasMany::make('Actividad', 'sessions', Session::class)->hideFromDetail(fn () => $this->sessions->isEmpty()),
+            HasMany::make(__('Actividad'), 'sessions', Session::class)->hideFromDetail(fn () => $this->sessions->isEmpty()),
 
-            HasMany::make('Datos de acceso enviados', 'emails', 'App\Nova\Email')->hideFromDetail(fn () => $this->emails->isEmpty()),
+            HasMany::make(__('Datos de acceso enviados'), 'emails', 'App\Nova\Email')->hideFromDetail(fn () => $this->emails->isEmpty()),
 
-            HasMany::make('Clientes', 'clients', 'App\Nova\User')->hideFromDetail(fn () => $this->clients->isEmpty()),
+            HasMany::make(__('Clientes'), 'clients', User::class)->hideFromDetail(fn () => $this->clients->isEmpty()),
 
         ];
     }

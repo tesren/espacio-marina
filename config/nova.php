@@ -100,6 +100,7 @@ return [
 
     'middleware' => [
         'web',
+        \App\Http\Middleware\SetLocale::class,
         HandleInertiaRequests::class,
         DispatchServingNovaEvent::class,
         BootTools::class,

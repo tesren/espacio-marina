@@ -29,6 +29,7 @@ new #[Layout('layouts.guest')] class extends Component
 
     @section('titles')
         <title>{{__('Inicia sesión')}} - Espacio Marina</title>
+        <meta name="description" content="{{__('Inicia sesión en tu cuenta de Espacio Marina & Golf y descubre un mundo de oportunidades en el paraíso de Puerto Vallarta. Con tu cuenta, accede a información detallada sobre nuestros condominios, guarda unidades de tu agrado, agenda citas para visitas personalizadas y más.')}}">
     @endsection
 
     <div class="grid grid-cols-1 lg:grid-cols-2 bg-white shadow-md">

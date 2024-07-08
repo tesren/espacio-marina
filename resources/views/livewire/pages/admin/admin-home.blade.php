@@ -173,7 +173,11 @@
         </div>
 
         <div class="col-12 col-lg-9">
-            <img src="{{asset('img/master-plan.webp')}}" alt="Master Plan de Espacio Marina & Golf" class="w-100">
+            @if ( app()->getLocale() == 'es' )
+                <img src="{{asset('img/master-plan.webp')}}" alt="Master Plan de Espacio Marina & Golf" class="w-100">
+            @else
+                <img src="{{asset('img/master-plan-en.webp')}}" alt="Master Plan Espacio Marina & Golf" class="w-100">
+            @endif
         </div>
 
         <div class="col-1 align-self-center text-center d-none d-lg-block">

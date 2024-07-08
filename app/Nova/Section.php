@@ -19,7 +19,7 @@ class Section extends Resource
     public static $model = \App\Models\Section::class;
 
     public function title(){
-        return $this->name;
+        return __('Torre').' '.$this->tower_name.' - '.$this->view;
     }
 
     /**
@@ -59,13 +59,13 @@ class Section extends Resource
             Text::make('Nombre', 'name')->sortable()->rules('required'),
 
             Select::make('Vista', 'view')->options([
-                'Golf' => 'Campo de Golf',
-                'Mar' => 'Mar',
+                'Golf' => __('Campo de Golf'),
+                'Mar' => __('Mar'),
             ])->displayUsingLabels(),
 
             Select::make('Torre', 'tower_name')->options([
-                'A' => 'Torre A',
-                'B' => 'Torre B',
+                'A' => __('Torre A'),
+                'B' => __('Torre B'),
             ])->displayUsingLabels(),
 
             HasMany::make('Unidades', 'units', Unit::class),

@@ -26,7 +26,7 @@ class MyClients extends Table
             foreach ($clients as $client) {
     
     
-                $subtitle = $client->email.' | Actualizado el día: '.$client->updated_at;
+                $subtitle = $client->email.__(' | Actualizado el día: ').$client->updated_at;
     
                 $metricRows[] = MetricTableRow::make()
                     ->icon('user')
@@ -44,8 +44,8 @@ class MyClients extends Table
                 MetricTableRow::make()
                     ->icon('exclamation')
                     ->iconClass('text-yellow-500')
-                    ->title('Aún no tienes clientes registrados')
-                    ->subtitle('Pronto podrás ver aquí a tus clientes'),
+                    ->title(__('Aún no tienes clientes registrados'))
+                    ->subtitle(__('Pronto podrás ver aquí a tus clientes')),
             ];
 
         }
@@ -61,7 +61,7 @@ class MyClients extends Table
      */
     public function name()
     {
-        return 'Mis Clientes';
+        return __('Mis Clientes');
     }
 
     /**

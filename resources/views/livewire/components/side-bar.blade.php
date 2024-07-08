@@ -112,32 +112,42 @@
                     </a>
                 </li>
             
-                <li>
+                <li class="nav-item">
                     <a href="{{route('dashboard.oceanview')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.oceanview') active @endif" wire:navigate>
                         <i class="fa-solid fa-building me-2"></i>
                         {{__('Inventario')}}
                     </a>
                 </li>
             
-                <li>
+                <li class="nav-item">
                     <a href="{{route('dashboard.search')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.search') active @endif" wire:navigate>
                         <i class="fa-solid fa-magnifying-glass me-2"></i>
                         {{__('Buscar Unidades')}}
                     </a>
                 </li>
 
-                <li>
+                <li class="nav-item">
                     <a href="{{ route('dashboard.favorites') }}" class="nav-link @if(Route::currentRouteName() == 'dashboard.favorites') active @endif" wire:navigate>
                         <i class="fa-solid fa-heart me-2"></i>
                         {{__('Favoritos')}}
                     </a>
                 </li>
             
-                <li>
+                <li class="nav-item">
                     <a href="{{route('dashboard.profile')}}" class="nav-link @if(Route::currentRouteName() == 'dashboard.profile') active @endif" wire:navigate>
                         <i class="fa-solid fa-user me-2"></i>
                         {{__('Mi perfil')}}
                     </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-earth-americas me-2"></i> {{__('Idioma')}}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><button class="dropdown-item" type="button" wire:click="setEnglish">English</button></li>
+                      <li><button class="dropdown-item" type="button" wire:click="setSpanish">Español</button></li>
+                    </ul>
                 </li>
 
                 @if ( auth()->user()->role != 'client' )

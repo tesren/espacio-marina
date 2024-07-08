@@ -39,13 +39,13 @@ class ChangeStatus extends Action
     public function fields(NovaRequest $request)
     {
         return [
-            Select::make('Estado', 'status')->rules('required')->options(
+            Select::make(__('Estatus'), 'status')->rules('required')->options(
                 [
-                    'Disponible' => 'Disponible',
-                    'Apartada' => 'Apartada',
-                    'Vendida' => 'Vendida',
+                    'Disponible' => __('Disponible'),
+                    'Apartada' => __('Apartada'),
+                    'Vendida' => __('Vendida'),
                 ]
-            ),
+            )->displayUsingLabels(),
         ];
     }
 

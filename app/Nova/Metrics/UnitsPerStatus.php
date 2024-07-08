@@ -21,7 +21,11 @@ class UnitsPerStatus extends Partition
             'Disponible' => '#559368',
             'Apartada' => '#D48207',
             'Vendida' => '#B50505',
-        ]);
+        ])->label(fn ($value) => match ($value) {
+            'Disponible' => __('Disponible'),
+            'Apartada' => __('Apartada'),
+            'Vendida' => __('Vendida'),        
+        });
     }
 
     /**
@@ -51,7 +55,7 @@ class UnitsPerStatus extends Partition
      */
     public function name()
     {
-        return 'Estado de las Unidades';
+        return __('Estado de las Unidades');
     }
 
 

@@ -31,7 +31,7 @@ class ChangeUserLang extends Action
             $user->save();
         }
 
-        return Action::message('Lenguaje cambiado exitosamente');
+        return Action::message(__('Lenguaje cambiado exitosamente'));
     }
 
     /**
@@ -43,9 +43,9 @@ class ChangeUserLang extends Action
     public function fields(NovaRequest $request)
     {
         return [
-            Select::make('Lenguaje', 'lang')->options([
-                'es' => 'Español',
-                'en' => 'Inglés',
+            Select::make(__('Lenguaje'), 'lang')->options([
+                'es' => __('Español'),
+                'en' => __('Inglés'),
             ])->displayUsingLabels()->rules('required'),
         ];
     }

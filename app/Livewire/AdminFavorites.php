@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Unit;
 use Livewire\Component;
 use Illuminate\Support\Facades\App;
+use Livewire\Attributes\On; 
 
 class AdminFavorites extends Component
 {
@@ -24,5 +25,11 @@ class AdminFavorites extends Component
         $units = auth()->user()->savedUnits;
 
         return view('livewire.pages.admin.admin-favorites', compact('units'))->layout('layouts.admin-base');
+    }
+
+    #[On('change-lang')] 
+    public function updatePostList($lang)
+    {
+        App::setLocale(auth()->user()->lang);
     }
 }

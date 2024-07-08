@@ -24,12 +24,12 @@ class PaymentPlan extends Resource
      */
     public static function singularLabel()
     {
-        return __('Plan de pagos');
+        return __('Plan de pago');
     }
 
     public static function label()
     {
-        return __('Planes de pagos');
+        return __('Planes de pago');
     }
 
     /**
@@ -60,9 +60,9 @@ class PaymentPlan extends Resource
             ID::make()->sortable(),
 
             Text::make('Nombre', 'name')->rules('required', 'max:255'),
-            Text::make('Name', 'name_en')->rules('required', 'max:255')->help('Nombre traducido al Inglés')->hideFromIndex(),
+            Text::make('Name', 'name_en')->rules('required', 'max:255')->help(__('Nombre traducido al Inglés'))->hideFromIndex(),
 
-            Number::make('Descuento', 'discount')->min(0)->max(100)->sortable()->placeholder('Porcentaje de descuento')->displayUsing(
+            Number::make(__('Descuento'), 'discount')->min(0)->max(100)->sortable()->placeholder(__('Porcentaje de descuento'))->displayUsing(
                 function($value){
                     if($value != null){
                         return $value.'%';
@@ -73,7 +73,7 @@ class PaymentPlan extends Resource
             ),
 
             //Solo en preventa privada 
-            Number::make('Descuento adicional', 'additional_discount')->nullable()->min(0)->max(100)->hideFromIndex()->placeholder('Se descuenta al precio que ya tiene descuento')->displayUsing(
+            Number::make(__('Descuento adicional'), 'additional_discount')->nullable()->min(0)->max(100)->hideFromIndex()->placeholder('Se descuenta al precio que ya tiene descuento')->displayUsing(
                 function($value){
                     if($value != null){
                         return $value.'%';
@@ -83,13 +83,13 @@ class PaymentPlan extends Resource
                 }
             ),
 
-            Number::make('Enganche', 'down_payment')->min(0)->max(100)->rules('required')->placeholder('Porcentaje de enganche')->sortable()->displayUsing(
+            Number::make(__('Enganche'), 'down_payment')->min(0)->max(100)->rules('required')->placeholder('Porcentaje de enganche')->sortable()->displayUsing(
                 function($value){
                     return $value.'%';
                 }
             ),
 
-            Number::make('Segundo Pago', 'second_payment')->sortable()->min(0)->max(100)->displayUsing(
+            Number::make(__('Segundo Pago'), 'second_payment')->sortable()->min(0)->max(100)->displayUsing(
                 function($value){
                     if($value == null){
                         return $value;
@@ -99,7 +99,7 @@ class PaymentPlan extends Resource
                 }
             ),
 
-            Number::make('% Total de los Pagos Mensuales', 'months_percent')->min(0)->max(100)->sortable()->displayUsing(
+            Number::make(__('% Total de los Pagos Mensuales'), 'months_percent')->min(0)->max(100)->sortable()->displayUsing(
                 function($value){
                     if($value == null){
                         return $value;
@@ -109,7 +109,7 @@ class PaymentPlan extends Resource
                 }
             ),
 
-            Number::make('Pago final', 'closing_payment')->min(0)->max(100)->placeholder('Porcentaje del Pago ginal')->rules('required')->sortable()->displayUsing(
+            Number::make(__('Pago final'), 'closing_payment')->min(0)->max(100)->placeholder('Porcentaje del Pago ginal')->rules('required')->sortable()->displayUsing(
                 function($value){
                     return $value.'%';
                 }

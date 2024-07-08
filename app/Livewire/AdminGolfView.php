@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Unit;
 use Livewire\Component;
 use Illuminate\Support\Facades\App;
+use Livewire\Attributes\On; 
 
 class AdminGolfView extends Component
 {
@@ -79,5 +80,11 @@ class AdminGolfView extends Component
         App::setLocale($lang);
 
         return view('livewire.pages.admin.admin-golf-view')->layout('layouts.admin-base');
+    }
+
+    #[On('change-lang')] 
+    public function updatePostList($lang)
+    {
+        App::setLocale(auth()->user()->lang);
     }
 }

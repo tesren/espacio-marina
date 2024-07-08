@@ -30,10 +30,10 @@ class LowestUnitPrice extends Value
     public function ranges()
     {
         return [
-            'ALL' => 'Todo el tiempo',
-            30 => __('30 Días'),
-            60 => __('60 Días'),
-            365 => __('365 Días'),
+            'ALL' => __('Todo el tiempo'),
+            30 => '30 ' . __('Días'),
+            60 => '60 ' . __('Días'),
+            365 => '365 ' . __('Días'),
             'MTD' => __('Mes a la fecha'),
             'QTD' => __('4 meses a la fecha'),
             'YTD' => __('Año a la fecha'),
@@ -57,7 +57,7 @@ class LowestUnitPrice extends Value
      */
     public function name()
     {
-        return 'Precio mas bajo Disponible(Sin descuento)';
+        return __('Precio mas bajo Disponible(Sin descuento)');
     }
 
     

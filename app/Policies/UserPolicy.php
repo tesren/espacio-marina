@@ -125,4 +125,8 @@ class UserPolicy
     {
         //
     }
+
+    public function runAction(User $user){
+        return true;
+    }
 }

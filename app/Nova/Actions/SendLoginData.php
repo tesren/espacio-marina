@@ -27,7 +27,7 @@ class SendLoginData extends Action
     public function handle(ActionFields $fields, Collection $models)
     {
         if( count($models) > 1 ){
-            return Action::danger('Por favor no enviar más de 1 correo al mismo tiempo');
+            return Action::danger(__('Por favor no enviar más de 1 correo al mismo tiempo'));
         }else{
 
             foreach($models as $user){
@@ -68,14 +68,14 @@ class SendLoginData extends Action
                             $mail->password = $generatedPass;
                             $mail->save();
     
-                            return Action::message('Datos de acceso enviados correctamente.');
+                            return Action::message(__('Datos de acceso enviados correctamente.'));
                         } else {
                             // Ocurrió un error al enviar el correo electrónico
-                            return Action::danger('Error al enviar el correo a '.$user->email);
+                            return Action::danger(__('Error al enviar el correo a ').$user->email);
                         }
                     }
                     catch(\Exception $e){
-                        return Action::danger('Error al enviar email: '.$e->getMessage() );
+                        return Action::danger(__('Error al enviar email: ').$e->getMessage() );
                     }
                 /* }
                 else{

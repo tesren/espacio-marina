@@ -18,7 +18,7 @@ class LastUnits extends Table
      */
     public function calculate(NovaRequest $request)
     {
-        $latestUnits = Unit::latest()->limit(5)->get();
+        $latestUnits = Unit::latest('updated_at')->limit(5)->get();
         
         $metricRows = [];
 
@@ -30,12 +30,12 @@ class LastUnits extends Table
                 'Vendida' => 'text-red-500',
             ];
 
-            $subtitle = $listing->unitType->bedrooms.' REC '. $listing->unitType->bathrooms.' BA $'.number_format($listing->price).' '.$listing->currency.' | Actualizada el día: '.$listing->updated_at;
+            $subtitle = $listing->unitType->bedrooms.__(' REC '). $listing->unitType->bathrooms.' BA $'.number_format($listing->price).' '.$listing->currency.__(' | Actualizada el día: ').$listing->updated_at;
 
             $metricRows[] = MetricTableRow::make()
                 ->icon('home')
                 ->iconClass( $classArray[$listing->status] )
-                ->title('Unidad '.$listing->name)
+                ->title(__('Unidad') .' '. $listing->name)
                 ->subtitle($subtitle)
                 ->actions(function () use ($listing) {
                     return [
@@ -54,7 +54,7 @@ class LastUnits extends Table
      */
     public function name()
     {
-        return 'Ultimas unidades actualizadas';
+        return __('Ultimas unidades actualizadas');
     }
 
     /**

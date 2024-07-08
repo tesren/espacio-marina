@@ -6,6 +6,7 @@ use App\Models\Unit;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\App;
+use Livewire\Attributes\On; 
 
 class AdminSearch extends Component
 {
@@ -98,5 +99,11 @@ class AdminSearch extends Component
         $units = $units->orderBy('status', 'desc')->paginate(12);
         
         return view('livewire.pages.admin.admin-search', compact('units') )->layout('layouts.admin-base');
+    }
+
+    #[On('change-lang')] 
+    public function updatePostList($lang)
+    {
+        App::setLocale(auth()->user()->lang);
     }
 }

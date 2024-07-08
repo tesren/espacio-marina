@@ -66,9 +66,9 @@ class UnitType extends Resource
         return [
             ID::make()->sortable(),
 
-            Text::make('Nombre', 'name')->rules('required', 'max:50')->sortable(),
+            Text::make(__('Nombre'), 'name')->rules('required', 'max:50')->sortable(),
 
-            Select::make('Opción', 'option')->options([
+            Select::make(__('Opción'), 'option')->options([
                 'Opción 1' => 'Opción 1',
                 'Opción 2' => 'Opción 2',
                 'Garden House Opción 1' => 'Garden House Opción 1',
@@ -79,13 +79,13 @@ class UnitType extends Resource
 
             ])->displayUsingLabels()->nullable(),
 
-            Number::make('Recámaras', 'bedrooms')->rules('required')->min(0)->max(15)->help('Dejar en 0 si es Loft o Studio')->sortable(),
-            Number::make('Cuartos Flex', 'flexrooms')->rules('nullable')->min(0)->max(15)->sortable(),
-            Number::make('Baños', 'bathrooms')->rules('required')->min(0)->max(15)->step(0.5)->sortable(),
+            Number::make(__('Recámaras'), 'bedrooms')->rules('required')->min(0)->max(15)->help('Dejar en 0 si es Loft o Studio')->sortable(),
+            Number::make(__('Cuartos Flex'), 'flexrooms')->rules('nullable')->min(0)->max(15)->sortable(),
+            Number::make(__('Baños'), 'bathrooms')->rules('required')->min(0)->max(15)->step(0.5)->sortable(),
 
-            Panel::make('Medidas', $this->sizesFields()),
+            Panel::make(__('Medidas'), $this->sizesFields()),
 
-            Panel::make('Imágenes', $this->imageFields()),
+            Panel::make(__('Imágenes'), $this->imageFields()),
         ];
     }
 
@@ -103,13 +103,13 @@ class UnitType extends Resource
                     return $value.' m²';
                 }
             ),
-            Number::make('Terraza techada', 'exterior_const')->hideFromIndex()->placeholder('Metros cuadrados de la terraza')->min(0)->max(99999)->rules('required')->step(0.01)
+            Number::make(__('Terraza techada'), 'exterior_const')->hideFromIndex()->placeholder('Metros cuadrados de la terraza')->min(0)->max(99999)->rules('required')->step(0.01)
             ->displayUsing(
                 function($value){
                     return $value.' m²';
                 }
             ),
-            Number::make('Cajones de Estacionamiento', 'parking_spaces')->hideFromIndex()->min(0)->max(100)->nullable()
+            Number::make(__('Cajones de Estacionamiento'), 'parking_spaces')->hideFromIndex()->min(0)->max(100)->nullable()
     
         ];
     }
@@ -118,7 +118,7 @@ class UnitType extends Resource
     protected function imageFields() {
 
         return [
-            Images::make('Planos', 'blueprints')->showStatistics()->singleImageRules('dimensions:max_width=2000, max:2048')
+            Images::make(__('Planos'), 'blueprints')->showStatistics()->singleImageRules('dimensions:max_width=2000, max:2048')
             ->setFileName(function($originalFilename, $extension, $model){
 
                 // Eliminar caracteres especiales y acentos
@@ -134,7 +134,7 @@ class UnitType extends Resource
 
             }),
 
-            Images::make('Galería', 'gallery')->hideFromIndex()/*->rules('required')*/->enableExistingMedia()->showStatistics()
+            Images::make(__('Galería'), 'gallery')->hideFromIndex()/*->rules('required')*/->enableExistingMedia()->showStatistics()
             ->singleImageRules('dimensions:max_width=2000, max:2048')
             ->setFileName(function($originalFilename, $extension, $model){
 

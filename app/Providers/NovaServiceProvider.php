@@ -18,10 +18,11 @@ use Laravel\Nova\Menu\MenuItem;
 use App\Nova\ConstructionUpdate;
 use Laravel\Nova\Menu\MenuGroup;
 use Laravel\Nova\Menu\MenuSection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Blade;
 use Laravel\Nova\NovaApplicationServiceProvider;
-
+use Laravel\Nova\Tool;
 
 class NovaServiceProvider extends NovaApplicationServiceProvider
 {
@@ -49,15 +50,15 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::resource(Shape::class)->icon('cube'),
 
                 MenuSection::make('Marketing', [
-                    MenuItem::externalLink('Inicio', '/dashboard/home')->openInNewTab(),
-                    MenuItem::externalLink('Inventario', '/dashboard/inventory')->openInNewTab(),
+                    MenuItem::externalLink(__('Inicio'), '/dashboard/home')->openInNewTab(),
+                    MenuItem::externalLink(__('Inventario'), '/dashboard/inventory')->openInNewTab(),
                 ])->icon('star')->collapsable(),
 
-                MenuSection::make('Usuarios', [
+                MenuSection::make(__('Usuarios'), [
                     //MenuItem::filter('Clientes', User::class, UserType::make(), 'client'),
-                    MenuItem::externalLink('Clientes', '/nova/resources/users?users_page=1&users_filter=W3siU2VsZWN0OnJvbGUiOiJjbGllbnQifV0%3D'),
-                    MenuItem::externalLink('Asesores', '/nova/resources/users?users_page=1&users_filter=W3siU2VsZWN0OnJvbGUiOiJhZ2VudCJ9XQ%3D%3D'),
-                    MenuItem::externalLink('Administradores', '/nova/resources/users?users_page=1&users_filter=W3siU2VsZWN0OnJvbGUiOiJhZG1pbiJ9XQ%3D%3D'),
+                    MenuItem::externalLink(__('Clientes'), '/nova/resources/users?users_page=1&users_filter=W3siU2VsZWN0OnJvbGUiOiJjbGllbnQifV0%3D'),
+                    MenuItem::externalLink(__('Asesores'), '/nova/resources/users?users_page=1&users_filter=W3siU2VsZWN0OnJvbGUiOiJhZ2VudCJ9XQ%3D%3D'),
+                    MenuItem::externalLink(__('Administradores'), '/nova/resources/users?users_page=1&users_filter=W3siU2VsZWN0OnJvbGUiOiJhZG1pbiJ9XQ%3D%3D'),
                     MenuItem::resource(User::class),
                 ])->icon('user')->collapsable(),
             ];
@@ -66,7 +67,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         Nova::userMenu(function (Request $request, Menu $menu) {
             
             $menu->append(
-                MenuItem::externalLink('Ver Sitio Web', url('/')),
+                MenuItem::externalLink(__('Ver Sitio Web'), url('/'))
+            );
+
+            $menu->prepend(
+                MenuItem::link(__('Mi Perfil'), '/resources/users/'.$request->user()->getKey())
             );
 
             return $menu;
@@ -129,7 +134,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function tools()
     {
-        return [];
+        return [
+            
+        ];
     }
 
     /**
@@ -139,6 +146,6 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
      */
     public function register()
     {
-        //
+    
     }
 }
