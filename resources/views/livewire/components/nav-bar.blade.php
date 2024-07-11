@@ -1,7 +1,7 @@
 <div>
     {{-- The best athlete wants his opponent at his best. --}}
 
-    <nav class="navbar navbar-light bg-white fixed-top navbar-expand-xl shadow" style="z-index: 1081;">
+    <nav class="navbar navbar-light bg-white fixed-top navbar-expand-xl shadow" style="z-index: 1000;">
         <div class="container-fluid">
 
             <a class="navbar-brand ms-0 ms-lg-5" href="{{route('pages.home')}}" wire:navigate>

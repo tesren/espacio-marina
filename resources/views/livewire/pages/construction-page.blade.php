@@ -2,7 +2,7 @@
     
     @section('titles')
         <title>{{__('Avances de Obra')}} - Espacio Marina & Golf</title>
-        <meta name="description" content="{{__('Avances de obra mensuales de Espacio Marina & Golf en Puerto Vallarta. Nuestra página de avances de obra te ofrece una visión detallada de la evolución de esta espectacular torre de condominios con vista al mar y al campo de folg.')}}">
+        <meta name="description" content="{{__('Avances de obra mensuales de Espacio Marina & Golf en Puerto Vallarta. Nuestra página de avances de obra te ofrece una visión detallada de la evolución de esta espectacular torre de condominios con vista al mar y al campo de golf.')}}">
     @endsection
 
     {{-- Do your work, then step back. --}}

@@ -5,10 +5,11 @@ namespace App\Livewire;
 use App\Mail\NewLead;
 use App\Models\Message;
 use Livewire\Component;
+use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
 use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
-use Livewire\Attributes\Validate;
 
 
 class ContactForm extends Component
@@ -55,7 +56,7 @@ class ContactForm extends Component
 
 
         //para el webhook
-        $type = "Contacto desde el sitio web de Tridenta Towers";
+        $type = "Contacto desde el sitio web de Espacio Marina & Golf";
 
 
         if( app()->getLocale() == 'es' ){
@@ -83,12 +84,12 @@ class ContactForm extends Component
         ];
 
         // Enviar la solicitud POST al webhook
-        //$response = Http::post($webhookUrl, $data);
+        $response = Http::post($webhookUrl, $data);
 
 
-        //$email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');
+        $email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');
     
-        $email = Mail::to('erick@punto401.com');
+        //$email = Mail::to('erick@punto401.com');
         
         $email->send(new NewLead($msg));
 

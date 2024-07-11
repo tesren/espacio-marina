@@ -18,13 +18,13 @@
                 <source media="(max-width: 767px)" srcset="{{ asset('/img/home-mobile.webp') }}">
               
                 <!-- Fallback para navegadores que no soportan <picture> -->
-                <img src="{{asset('/img/facha-golf-detras.webp')}}" alt="Fachada Espacio Marina" class="w-100" style="height: 70vh; object-fit:cover; object-position:top;">
+                <img src="{{asset('/img/facha-golf-detras.webp')}}" alt="Fachada Espacio Marina" class="w-100 object-fit-cover" style="height: 77vh; object-position:top;">
             </picture>
 
         </div>
 
         <div class="col-1 col-lg-3 px-0 d-none d-lg-block">
-            <img src="{{asset('img/blue-colors.webp')}}" alt="" class="w-100" style="height: 70vh; object-fit:cover;">
+            <img src="{{asset('img/blue-colors.webp')}}" alt="" class="w-100" style="height: 77vh; object-fit:cover;">
         </div>
 
         <div class="bg-black-gradient"></div>
@@ -48,20 +48,21 @@
 
     </section>
 
-    <div class="row justify-content-evenly mb-0 mb-lg-5">
+    <div class="row container justify-content-evenly mb-0 mb-lg-5 px-0">
 
-        <div class="col-12 col-lg-3 align-self-center text-center text-lg-start">
-            <h2 class="fw-bold fs-1">{{__('Cerca de todo')}}</h2>
+        <div class="col-12 col-lg-4 align-self-center text-center text-lg-start">
+            <h2 class="fw-bold fs-0 mb-4 mb-lg-0">{{__('Cerca de todo')}}</h2>
         </div>
 
-        <div class="col-12 col-lg-3">
-            <p>{{__('Disfruta de tus vacaciones en la mejor zona de Puerto Vallarta, una ubicación privilegiada a sólo 400 m de la playa y a 5 min del aeropuerto.')}}</p>
+        <div class="col-12 col-lg-4 border-start border-end border-2 align-self-center px-3 px-lg-5 border-primary">
+            <p class="fs-5 fw-light">{{__('Disfruta de tus vacaciones en la mejor zona de Puerto Vallarta, una ubicación privilegiada a sólo 400 m de la playa y a 5 min del aeropuerto.')}}</p>
         </div>
 
-        <div class="col-12 col-lg-4 text-start text-lg-center amenities-bg py-5 py-lg-0">
-            <div>{{__('Playa')}} Puerto Vallarta <span class="ms-3">Club de Golf Marina</span></div>
-            <div>Marina Vallarta <span class="mx-3">{{__('Aeropuerto')}}</span> Starbucks</div>
-            <div>La Terraza di Roma <span class="ms-3">Viña & Salvatore’s Wine Bar</span></div>
+        <div class="col-12 col-lg-4 text-start text-lg-center amenities-bg py-5 py-lg-0 align-self-center fw-normal fs-5">
+            <div class="dot">{{__('Playa Puerto Vallarta')}} <span class="ms-3 dot">{{__('Club de Golf')}}</span></div>
+            <div class="dot">Marina Vallarta <span class="mx-3 dot">{{__('Aeropuerto')}}</span></div>
+            <div class="dot">La Terraza di Roma <span class="ms-3 dot">Starbucks</span></div>
+            <div class="dot">Viña & Salvatore’s Wine Bar</div>
         </div>
 
         <div class="col-12 text-center mt-4 d-none d-lg-none">
@@ -81,13 +82,13 @@
 
         <div class="col-12 col-lg-6 p-0 p-lg-1 position-relative">
 
-            <a href="#gallery" class="h-100 position-absolute top-0 start-0 btn btn-link link-light d-flex d-lg-none" aria-label="Anterior">
+            <a href="#gallery" class="h-100 position-absolute top-0 start-0 btn btn-link link-light d-flex d-lg-none text-decoration-none" aria-label="Anterior">
                 <i class="fa-solid fa-2x fa-chevron-left align-self-center"></i>
             </a>
 
             <img src="{{asset('img/jacuzzi.jpg')}}" alt="Jacuzzi de Espacio Marina" class="w-100 object-fit-cover" data-fancybox="gallery" style="height: 50vh;" loading="lazy">
 
-            <a href="#gallery" class="h-100 position-absolute top-0 end-0 btn btn-link link-light d-flex d-lg-none" aria-label="Siguiente">
+            <a href="#gallery" class="h-100 position-absolute top-0 end-0 btn btn-link link-light d-flex d-lg-none text-decoration-none" aria-label="Siguiente">
                 <i class="fa-solid fa-2x fa-chevron-right align-self-center"></i>
             </a>
 
@@ -103,7 +104,7 @@
     {{-- Amenidades --}}
     <div class="container mb-6">
         <h2>{{__('El lugar ideal que estabas buscando')}}</h2>
-        <p class="mb-5">{{__('Invierte en un desarrollo único con un diseño arquitectónico y acabados de primer nivel, en el corazón de Puerto Vallarta.')}}</p>
+        <p class="mb-5">{{__('Invierte en un desarrollo único con un diseño arquitectónico y acabados de primer nivel, en una de las zonas más exclusivas de Puerto Vallarta.')}}</p>
 
         <div class="row justify-center text-center">
 
@@ -131,7 +132,7 @@
             <div class="col-12 col-lg-2 mb-4 mb-lg-0">
                 <div class="row">
                     <img src="{{asset('img/icons/park.png')}}" alt="" class="col-4 col-lg-12 px-3 px-lg-5" loading="lazy">
-                    <div class="fw-bold my-3 col-8 col-lg-12 align-self-center">{{__('Parque Interno')}}</div>
+                    <div class="fw-bold my-3 col-8 col-lg-12 align-self-center">{{__('Parque interno')}}</div>
                 </div>
             </div>
 
@@ -189,7 +190,7 @@
         </div>
 
         <div class="col-12 col-lg-6 text-center text-lg-start align-self-center mb-4">
-            <p class="fs-5">{{__('Vistas increibles en todos lados, elige la mejor opción que tenemos para ti.')}}</p>
+            <p class="fs-5">{{__('Vistas increíbles en todos lados, elige la mejor opción que tenemos para ti.')}}</p>
         </div>
         
         <div class="col-1 align-self-center text-center d-none d-lg-block">

@@ -24,7 +24,7 @@
 
     <div class="container mt-5 mb-4">
         <h1>{{__('Búsqueda de Condominios')}}</h1>
-        <p>{{__('Busca de forma mas práctica por medio de nuestro formulario y nuestra tabla.')}}</p>
+        <p>{{__('Busca de forma más práctica por medio de nuestro formulario y nuestra tabla.')}}</p>
         <div class="d-flex mb-4">
             <div class="me-3">
                 <span class="px-2 py-1 bg-success text-success rounded-2">D</span> {{__('Disponible')}}

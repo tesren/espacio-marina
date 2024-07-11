@@ -55,7 +55,7 @@ class ContactPage extends Component
 
 
         //para el webhook
-        $type = "Contacto desde el sitio web de Tridenta Towers";
+        $type = "Contacto desde el sitio web de Espacio Marina & Golf";
 
 
         if( app()->getLocale() == 'es' ){
@@ -83,12 +83,12 @@ class ContactPage extends Component
         ];
 
         // Enviar la solicitud POST al webhook
-        //$response = Http::post($webhookUrl, $data);
+        $response = Http::post($webhookUrl, $data);
 
 
-        //$email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');
+        $email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');
     
-        $email = Mail::to('erick@punto401.com');
+        //$email = Mail::to('erick@punto401.com');
         
         $email->send(new NewLead($msg));
 

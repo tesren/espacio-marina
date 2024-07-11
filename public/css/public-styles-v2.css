@@ -263,6 +263,16 @@ body{
     color: white;
 }
 
+.dot::before {
+    content: '•';
+    margin-right: 8px; /* Ajusta el espaciado según sea necesario */
+}
+
+.border-primary {
+    --bs-border-opacity: 1;
+    border-color: var(--darkblue), 1 !important;
+}
+
 @media (max-width: 992px) {
 
     .unit-info-border{

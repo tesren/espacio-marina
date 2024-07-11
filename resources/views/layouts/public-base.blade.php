@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
 
-        <link rel="stylesheet" href="{{ asset('css/public-styles-v1.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/public-styles-v2.css') }}">
 
         @include('components.favicon')
 

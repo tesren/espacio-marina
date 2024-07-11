@@ -125,13 +125,20 @@
                 <div class="col-12 col-lg-3 mb-3">
                     <i class="fa-solid fa-bed text-blue"></i> 
                     @if ($unit->unitType->bedrooms == 0)
+
                         <span class="fw-light">{{__('Estudio')}}</span>
+
+                    @elseif ($unit->unitType->bedrooms == 1)
+
+                        {{$unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámara')}}</span> 
+                        
                     @else
                         {{$unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámaras')}}</span> 
                     @endif
+
                 </div>
 
-                <div class="col-12 col-lg-2 mb-3">
+                <div class="col-12 col-lg-3 mb-3">
                     <i class="fa-solid fa-bath text-blue"></i> {{$unit->unitType->bathrooms}} 
                     @if ($unit->unitType->bathrooms > 1)
                         <span class="fw-light">{{__('Baños')}}</span>
@@ -212,7 +219,8 @@
                     {{__($unit->status)}}
                 </div>
 
-                <h3 class="fs-1 text-center">${{ number_format($unit->price) }} {{$unit->currency}}</h3>
+                <h3 class="fs-1 text-center mb-0">${{ number_format($unit->price) }} {{$unit->currency}}</h3>
+                <div class="fs-6 mb-2 text-center">{{__('El precio incluye 4% de Descuento')}}</div>
             @endif
 
             <div class="fs-5 mb-1 d-none d-lg-block">{{__('¿Necesitas más información?')}}</div>
