@@ -224,7 +224,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" class="position-absolute h-100 start-0 top-0 px-0" viewBox="0 0 1920 980">
     
                         @foreach ($oceanview_units as $unit)
-                            <a href="{{route('pages.unit', ['name' => $unit->name])}}" wire:navigate class="text-decoration-none link-light" title="{{$unit->name}}">
+                            <a href="{{route('pages.unit', ['name' => $unit->name, 'contact' => request()->query('contact') ] )}}" wire:navigate class="text-decoration-none link-light" title="{{$unit->name}}">
 
                                 <polygon class="{{ strtolower($unit->status) }}-class" points="{{$unit->shape->points ?? '0,0'}}"></polygon>
                                 
@@ -264,7 +264,7 @@
                     </li>
         
                     <li class="nav-item" role="presentation">
-                      <a href="{{route('pages.golf')}}" class="nav-link inventory-btns text-center" wire:navigate>
+                      <a href="{{route('pages.golf', request()->query() )}}" class="nav-link inventory-btns text-center" wire:navigate>
                         <img src="{{asset('img/icons/golf.png')}}" width="50px" alt="">
                         <div class="d-block d-lg-none mt-2 text-blue">{{__('Vista al Golf')}}</div>
                       </a>

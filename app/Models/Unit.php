@@ -48,6 +48,16 @@ class Unit extends Model implements HasMedia
     }
 
     /**
+     * Get the lockoff associated with the Unit
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lockoff()
+    {
+        return $this->belongsTo(Unit::class, 'lockoff_id');
+    }
+
+    /**
      * Get the tower that owns the Unit
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -140,6 +140,8 @@ class Unit extends Resource
 
             Image::make(__('Vista de la unidad'), 'view_path')->disk('media')->help('Suba la imagen de la vista de la unidad'),
 
+            BelongsTo::make('Lockoff', 'lockoff', Unit::class)->withoutTrashed()->nullable()->hideFromIndex()->help('Selecciona la unidad con la que se puede hacer Lockoff')->searchable(),
+
             Panel::make(__('Medidas'), $this->sizesFields()),
 
             HasMany::make(__('Clientes que Guardaron esta Unidad'), 'users', User::class),

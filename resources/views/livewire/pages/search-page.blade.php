@@ -189,7 +189,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('pages.unit', ['name'=>$unit->name]) }}" class="btn btn-blue" target="_blank" rel="noopener noreferrer">
+                                    <a href="{{ route('pages.unit', ['name'=>$unit->name, 'contact' => request()->query('contact') ]) }}" class="btn btn-blue" target="_blank" rel="noopener noreferrer">
                                         {{__('Ver más')}}
                                     </a>
                                 </td>

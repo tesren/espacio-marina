@@ -4,7 +4,7 @@
     <nav class="navbar navbar-light bg-white fixed-top navbar-expand-xl shadow" style="z-index: 1000;">
         <div class="container-fluid">
 
-            <a class="navbar-brand ms-0 ms-lg-5" href="{{route('pages.home')}}" wire:navigate>
+            <a class="navbar-brand ms-0 ms-lg-5" href="{{route('pages.home', request()->query() )}}" wire:navigate>
                 <img src="{{asset('/img/logo-espacio-marina-azul.webp')}}" alt="Logo de Espacio Marina" width="130px">
             </a>
 
@@ -26,21 +26,21 @@
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
 
                         <li class="nav-item me-0 me-lg-4 d-block d-lg-none">
-                            <a href="{{ route('pages.home') }}" class="nav-link @if(Route::currentRouteName() == 'pages.home') active @endif" wire:navigate>
+                            <a href="{{ route('pages.home', request()->query() ) }}" class="nav-link @if(Route::currentRouteName() == 'pages.home') active @endif" wire:navigate>
                                 <i class="fa-solid fa-house-chimney me-2"></i>
                                 {{__('Inicio')}}
                             </a>
                         </li>
                     
                         <li class="nav-item me-0 me-lg-4">
-                            <a href="{{route('pages.ocean')}}" class="nav-link @if(Route::currentRouteName() == 'pages.ocean') active @endif" wire:navigate>
+                            <a href="{{route('pages.ocean', request()->query() )}}" class="nav-link @if(Route::currentRouteName() == 'pages.ocean') active @endif" wire:navigate>
                                 <i class="fa-solid fa-building me-2 d-inline d-lg-none"></i>
                                 {{__('Inventario')}}
                             </a>
                         </li>
 
                         <li class="nav-item me-0 me-lg-4">
-                            <a href="{{route('pages.search')}}" class="nav-link @if(Route::currentRouteName() == 'pages.search') active @endif" wire:navigate>
+                            <a href="{{route('pages.search', request()->query() )}}" class="nav-link @if(Route::currentRouteName() == 'pages.search') active @endif" wire:navigate>
                                 <i class="fa-solid fa-magnifying-glass me-2 d-inline d-lg-none"></i>
                                 {{__('Buscar Unidades')}}
                             </a>
@@ -48,23 +48,26 @@
 
                         @php
                             $const_updates = App\Models\ConstructionUpdate::all();
+                            $contact = request()->query('contact');
                         @endphp
 
                         @if ( count($const_updates) > 0)
                             <li class="nav-item me-0 me-lg-4">
-                                <a href="{{route('pages.construction')}}" class="nav-link @if(Route::currentRouteName() == 'pages.construction') active @endif" wire:navigate>
+                                <a href="{{route('pages.construction', request()->query() )}}" class="nav-link @if(Route::currentRouteName() == 'pages.construction') active @endif" wire:navigate>
                                     <i class="fa-solid fa-person-digging me-2 d-inline d-lg-none"></i>
                                     {{__('Avances de Obra')}}
                                 </a>
                             </li>
                         @endif 
                         
-                        <li class="nav-item">
-                            <a href="{{ route('pages.contact') }}" class="nav-link @if(Route::currentRouteName() == 'pages.contact') active @endif" wire:navigate>
-                                <i class="fa-solid fa-envelope me-2 d-inline d-lg-none"></i>
-                                {{__('Contacto')}}
-                            </a>
-                        </li>
+                        @if ($contact != 'no')
+                            <li class="nav-item">
+                                <a href="{{ route('pages.contact', request()->query() ) }}" class="nav-link @if(Route::currentRouteName() == 'pages.contact') active @endif" wire:navigate>
+                                    <i class="fa-solid fa-envelope me-2 d-inline d-lg-none"></i>
+                                    {{__('Contacto')}}
+                                </a>
+                            </li>
+                        @endif
 
                         <li class="nav-item dropdown d-block d-lg-none">
 

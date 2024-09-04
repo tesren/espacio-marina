@@ -39,7 +39,7 @@
                 <p>{{__('Enamórate de Espacio Marina & Golf, un desarrollo ideal para relajarte, salir de la ciudad y disfrutar momentos especiales con tu familia en las hermosas playas de Puerto Vallarta.')}}</p>
                 
                 <div class="mb-3">{{__('¡Mira las unidades que tenemos para ti!')}}</div>
-                <a href="{{ route('pages.ocean') }}" wire:navigate class="btn btn-blue w-100">
+                <a href="{{ route('pages.ocean', request()->query() ) }}" wire:navigate class="btn btn-blue w-100">
                     {{__('Ver inventario')}}
                 </a>
             </div>
