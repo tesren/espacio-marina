@@ -71,4 +71,21 @@
 
     @endif
 
+    @script
+        <script>
+            $wire.on('form-google-conversion', () => {
+                
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-996157886/BKN_CMrqyegZEL7TgNsD',
+                    'value': 1.0,
+                    'currency': 'MXN'
+                });
+
+            });
+        </script>
+    @endscript
+
 </div>

@@ -174,8 +174,14 @@
                                 <td class="text-center">
                                     @if ($unit->unitType->bedrooms == 0)
                                         {{__('Loft')}}
+                                        @if ( isset($unit->lockoff) and $unit->lockoff->status == 'Disponible' )
+                                            (Lockoff {{__('Disponible')}})
+                                        @endif
                                     @else
                                         {{ $unit->unitType->bedrooms }}
+                                        @if ( isset($unit->lockoff) and $unit->lockoff->status == 'Disponible' )
+                                            (Lockoff {{__('Disponible')}})
+                                        @endif
                                     @endif
                                 </td>
 
@@ -194,6 +200,7 @@
                                     </a>
                                 </td>
                             </tr>
+
                         @endforeach
                     @else
                     

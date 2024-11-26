@@ -24,7 +24,7 @@ class OceanViewPage extends Component
 
     public function search(){
 
-        $units = Unit::where('price', '>' ,$this->min_price)->where('price','<', $this->max_price);
+        $units = Unit::where('price', '>' ,$this->min_price)->where('price','<', $this->max_price)->where('status', '!=', 'Vendida')->whereIn('section_id', [1,4]);
 
         if( $this->floor != 0 ){
             $units = $units->where('floor', $this->floor);
@@ -32,9 +32,9 @@ class OceanViewPage extends Component
 
         if($this->tower != 0){
             if ($this->tower == 'A') {
-                $units = $units->whereIn('section_id', [1,2] );
+                $units = $units->where('section_id', 1 );
             } else {
-                $units = $units->whereIn('section_id', [3,4] );
+                $units = $units->where('section_id', 4 );
             }            
         }
 
@@ -50,7 +50,9 @@ class OceanViewPage extends Component
                 break;
 
                 case 2:
-                    $units = $units->where('unit_type_id', 9 );
+                    $units = $units->where(function($query) {
+                        $query->where('unit_type_id', 9)->orWhere('lockoff_id', '!=', 0);
+                    });
                 break;
 
                 case 3:
@@ -66,7 +68,7 @@ class OceanViewPage extends Component
         }
 
 
-        $this->oceanview_units = $units->whereIn('section_id', [1,4])->get();
+        $this->oceanview_units = $units->get();
 
         $this->dispatch('close-modal'); 
     }

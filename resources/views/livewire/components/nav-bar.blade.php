@@ -23,24 +23,28 @@
 
                 <div class="offcanvas-body bg-white">
 
+                    @php
+                        $route = Route::currentRouteName();
+                    @endphp
+
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
 
                         <li class="nav-item me-0 me-lg-4 d-block d-lg-none">
-                            <a href="{{ route('pages.home', request()->query() ) }}" class="nav-link @if(Route::currentRouteName() == 'pages.home') active @endif" wire:navigate>
+                            <a href="{{ route('pages.home', request()->query() ) }}" class="nav-link @if( strpos($route, 'search') != false) active @endif" wire:navigate>
                                 <i class="fa-solid fa-house-chimney me-2"></i>
                                 {{__('Inicio')}}
                             </a>
                         </li>
                     
                         <li class="nav-item me-0 me-lg-4">
-                            <a href="{{route('pages.ocean', request()->query() )}}" class="nav-link @if(Route::currentRouteName() == 'pages.ocean') active @endif" wire:navigate>
+                            <a href="{{route('pages.ocean', request()->query() )}}" class="nav-link @if( strpos($route, 'ocean') != false or strpos($route, 'golf') != false ) active @endif" wire:navigate>
                                 <i class="fa-solid fa-building me-2 d-inline d-lg-none"></i>
                                 {{__('Inventario')}}
                             </a>
                         </li>
 
                         <li class="nav-item me-0 me-lg-4">
-                            <a href="{{route('pages.search', request()->query() )}}" class="nav-link @if(Route::currentRouteName() == 'pages.search') active @endif" wire:navigate>
+                            <a href="{{route('pages.search', request()->query() )}}" class="nav-link @if( strpos($route, 'search') != false) active @endif" wire:navigate>
                                 <i class="fa-solid fa-magnifying-glass me-2 d-inline d-lg-none"></i>
                                 {{__('Buscar Unidades')}}
                             </a>
@@ -53,7 +57,7 @@
 
                         @if ( count($const_updates) > 0)
                             <li class="nav-item me-0 me-lg-4">
-                                <a href="{{route('pages.construction', request()->query() )}}" class="nav-link @if(Route::currentRouteName() == 'pages.construction') active @endif" wire:navigate>
+                                <a href="{{route('pages.construction', request()->query() )}}" class="nav-link @if( strpos($route, 'construction') != false) active @endif" wire:navigate>
                                     <i class="fa-solid fa-person-digging me-2 d-inline d-lg-none"></i>
                                     {{__('Avances de Obra')}}
                                 </a>
@@ -62,7 +66,7 @@
                         
                         @if ($contact != 'no')
                             <li class="nav-item">
-                                <a href="{{ route('pages.contact', request()->query() ) }}" class="nav-link @if(Route::currentRouteName() == 'pages.contact') active @endif" wire:navigate>
+                                <a href="{{ route('pages.contact', request()->query() ) }}" class="nav-link @if( strpos($route, 'contact') != false) active @endif" wire:navigate>
                                     <i class="fa-solid fa-envelope me-2 d-inline d-lg-none"></i>
                                     {{__('Contacto')}}
                                 </a>

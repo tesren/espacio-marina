@@ -95,7 +95,7 @@ class ContactForm extends Component
 
         session()->flash('message', 'Mensaje enviado existosamente');
 
-        $this->reset();
+        $this->dispatch('form-google-conversion'); 
 
     }
 }

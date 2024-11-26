@@ -86,195 +86,38 @@
 
     @endisset
 
-    {{-- Información --}}
-    <div class="row justify-content-evenly mb-6">
-        
-        @php
-            if($unit->status == 'Disponible'){
-                $badgeBg = 'bg-success';
-                $textColor = 'text-success';
-            }elseif($unit->status == 'Apartada'){
-                $badgeBg = 'bg-warning';
-                $textColor = 'text-warning';
-            }
-            else{
-                $badgeBg = 'bg-danger';
-                $textColor = 'text-danger';
-            }
-        @endphp
+    @if ($unit->lockoff and $unit->status == 'Disponible' and $unit->lockoff_type == '0')
+        @if ($unit->lockoff->status == 'Disponible')
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-        <div class="col-12 col-lg-11 px-4 px-lg-0 order-1 order-lg-1 text-center text-lg-start">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fs-4" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+                        {{__('Unidad')}} {{$unit->name}}
+                    </button>
+                </li>
 
-            <div class="{{$textColor}} mb-2 fs-5 fw-light d-inline-block d-lg-none">
-                {{__($unit->status)}}
-            </div>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link fs-4 active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+                        {{__('Unidad')}} {{$unit->name}} + {{$unit->lockoff->name}}
+                    </button>
+                </li>
 
-            <h1 class="mb-1">
-                {{__('Unidad')}} {{$unit->name}}
-            </h1>
-
-            <div class="fs-4 fw-light text-secondary mb-1 mb-lg-4">{{__('Tipo')}} {{$unit->unitType->name}}</div>
-        </div>
-
-        <div class="col-12 col-lg-7 px-4 px-lg-4 order-3 order-lg-2">
-            
-            <h2 class="fs-3">{{__('Características')}}</h2>
-
-            <div class="row mb-3 fs-5">
-
-                <div class="col-12 col-lg-3 mb-3">
-                    <i class="fa-solid fa-bed text-blue"></i> 
-                    @if ($unit->unitType->bedrooms == 0)
-
-                        <span class="fw-light">{{__('Estudio')}}</span>
-
-                    @elseif ($unit->unitType->bedrooms == 1)
-
-                        {{$unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámara')}}</span> 
-                        
-                    @else
-                        {{$unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámaras')}}</span> 
-                    @endif
-
-                </div>
-
-                <div class="col-12 col-lg-3 mb-3">
-                    <i class="fa-solid fa-bath text-blue"></i> {{$unit->unitType->bathrooms}} 
-                    @if ($unit->unitType->bathrooms > 1)
-                        <span class="fw-light">{{__('Baños')}}</span>
-                    @else
-                        <span class="fw-light">{{__('Baño')}}</span>
-                    @endif
-                </div>
-
-                <div class="col-12 col-lg-3 mb-3">
-                    <i class="fa-solid fa-arrow-turn-up text-blue"></i> 
-                    <span class="fw-light">{{__('Nivel')}}</span> {{$unit->floor}}
-                </div>
-
-                <div class="w-100"></div>
-
-                <div class="col-12 col-lg-4 mb-3">
-                    <i class="fa-solid fa-car text-blue"></i> {{$unit->unitType->parking_spaces}} {{__('Cajón de estacionamiento')}}
-                </div>
-
-                <div class="col-12 col-lg-5 mb-3">
-                    <i class="fa-solid fa-building text-blue"></i> {{__($unit->section->name)}}
-                </div>
-
-            </div>
-
-            <h2 class="fs-3">{{__('Dimensiones')}}</h2>
-            <div class="row fs-5 fw-light mb-5 mb-lg-0">
-                <div class="col-12 col-lg-4 mb-3">
-                    <i class="fa-solid fa-expand text-blue"></i> {{__('Interior')}}: {{$unit->interior_const}} {{__('m²')}}
-                </div>
-
-                <div class="col-12 col-lg-4 mb-3">
-                    <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$unit->exterior_const}} {{__('m²')}}
-                </div>
-
-                @if($unit->extra_exterior_const != 0)
-                    <div class="col-12 col-lg-4 mb-3">
-                        <i class="fa-solid fa-maximize text-blue"></i> {{__('Terraza Extendida')}}: {{$unit->extra_exterior_const}} {{__('m²')}}
-                    </div>
-                @endif
-                
-                @if($unit->patio != 0)
-                    <div class="col-12 col-lg-4 mb-3">
-                        <i class="fa-solid fa-maximize text-blue"></i> {{__('Patio')}}: {{$unit->patio}} {{__('m²')}}
-                    </div>
-                @endif
-
-                @if($unit->rooftop != 0)
-                    <div class="col-12 col-lg-4 mb-3">
-                        <i class="fa-solid fa-umbrella-beach text-blue"></i> {{__('Rooftop')}}: {{$unit->rooftop}} {{__('m²')}}
-                    </div>
-                @endif
-
-                @if($unit->garden != 0)
-                    <div class="col-12 col-lg-4 mb-3">
-                        <i class="fa-solid fa-seedling text-blue"></i> {{__('Jardín')}}: {{$unit->garden}} {{__('m²')}}
-                    </div>
-                @endif
-
-                @if($unit->storage != 0)
-                    <div class="col-12 col-lg-4 mb-3">
-                        <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{$unit->storage}} {{__('m²')}}
-                    </div>
-                @endif
-
-                <div class="col-12 col-lg-4 mb-3">
-                    <i class="fa-solid fa-house-chimney text-blue"></i> {{__('Total')}}: {{$unit->const_total}} {{__('m²')}}
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-12 col-lg-4 align-self-center text-center position-relative order-2 order-lg-3 mb-5 mb-lg-0">
-
-            @if ($unit->price != 0 and $unit->status == 'Disponible')
-
-                <div class="badge {{$badgeBg}} rounded-pill mb-2 fs-5 fw-light d-none d-lg-inline-block">
-                    {{__($unit->status)}}
-                </div>
-
-                <h3 class="fs-1 text-center mb-0">${{ number_format($unit->price) }} {{$unit->currency}}</h3>
-                <div class="fs-6 mb-2 text-center">{{__('El precio incluye 4% de Descuento')}}</div>
-            @endif
-
-            <div class="fs-5 mb-1 d-none d-lg-block">{{__('¿Necesitas más información?')}}</div>
-            <a href="#contact" class="btn btn-blue d-inline-block shadow rounded-2">
-                {{ __('Contactar a un asesor') }}
-            </a>
-        </div>
-
-    </div>
-
-    @php
-        $blueprints = $unit->unitType->getMedia('blueprints')
-    @endphp
-
-    {{-- Planos --}}
-    @if ( count($blueprints) > 0)
-        <div class="row justify-content-evenly mb-6 bg-line-blue">
-            <div class="col-12 col-lg-10 col-xxl-7">
-
-                <h3 class="fs-2 text-center mb-4">{{__('Planos de la unidad')}}</h3>
-                
-                <img src="{{ $blueprints[0]->getUrl('large') }}" alt="Planos de la unidad {{$unit->name}} de Espacio Marina & Golf" class="w-100" data-fancybox="blueprints">
-                <div class="my-2 text-center px-3 fs-5">{{$unit->unitType->name}}</div>
-            </div>
-        </div>
+            </ul>
+        @endif
     @endif
 
-    {{-- Lockoff --}}
-    @if ($unit->lockoff and $unit->lockoff->status == 'Disponible')
+    <div class="tab-content @if($unit->lockoff) bg-light @endif py-5" id="myTabContent">
 
-        @php
-            $lockoff_unit = $unit->lockoff;
-        @endphp
-
-        <div class="text-center">
-            
-            <h4 class="fs-2 fw-light">Lockoff {{__('Disponible')}}</h4>
-
-            <button class="btn btn-blue mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#unitLockoff" aria-expanded="false" aria-controls="unitLockoff">
-                <i class="fa-solid fa-angles-down"></i> Ver Lockoff
-            </button>
-        </div>
-
-        {{-- Collapse --}}
-        <div class="collapse mb-6" id="unitLockoff">
-            <div class="bg-light py-5">
-            
+        @if ($unit->lockoff_type == '0')
+            <div class="tab-pane fade @if($unit->lockoff) @else show active @endif" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                {{-- Información --}}
                 <div class="row justify-content-evenly mb-6">
-                    
+                        
                     @php
-                        if($lockoff_unit->status == 'Disponible'){
+                        if($unit->status == 'Disponible'){
                             $badgeBg = 'bg-success';
                             $textColor = 'text-success';
-                        }elseif($lockoff_unit->status == 'Apartada'){
+                        }elseif($unit->status == 'Apartada'){
                             $badgeBg = 'bg-warning';
                             $textColor = 'text-warning';
                         }
@@ -287,14 +130,14 @@
                     <div class="col-12 col-lg-11 px-4 px-lg-0 order-1 order-lg-1 text-center text-lg-start">
 
                         <div class="{{$textColor}} mb-2 fs-5 fw-light d-inline-block d-lg-none">
-                            {{__($lockoff_unit->status)}}
+                            {{__($unit->status)}}
                         </div>
 
                         <h1 class="mb-1">
-                            {{__('Unidad')}} {{$lockoff_unit->name}}
+                            {{__('Unidad')}} {{$unit->name}}
                         </h1>
 
-                        <div class="fs-4 fw-light text-secondary mb-1 mb-lg-4">{{__('Tipo')}} {{$lockoff_unit->unitType->name}}</div>
+                        <div class="fs-4 fw-light text-secondary mb-1 mb-lg-4">{{__('Tipo')}} {{$unit->unitType->name}}</div>
                     </div>
 
                     <div class="col-12 col-lg-7 px-4 px-lg-4 order-3 order-lg-2">
@@ -305,23 +148,23 @@
 
                             <div class="col-12 col-lg-3 mb-3">
                                 <i class="fa-solid fa-bed text-blue"></i> 
-                                @if ($lockoff_unit->unitType->bedrooms == 0)
+                                @if ($unit->unitType->bedrooms == 0)
 
                                     <span class="fw-light">{{__('Estudio')}}</span>
 
-                                @elseif ($lockoff_unit->unitType->bedrooms == 1)
+                                @elseif ($unit->unitType->bedrooms == 1)
 
-                                    {{$lockoff_unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámara')}}</span> 
+                                    {{$unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámara')}}</span> 
                                     
                                 @else
-                                    {{$lockoff_unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámaras')}}</span> 
+                                    {{$unit->unitType->bedrooms}} <span class="fw-light">{{__('Recámaras')}}</span> 
                                 @endif
 
                             </div>
 
                             <div class="col-12 col-lg-3 mb-3">
-                                <i class="fa-solid fa-bath text-blue"></i> {{$lockoff_unit->unitType->bathrooms}} 
-                                @if ($lockoff_unit->unitType->bathrooms > 1)
+                                <i class="fa-solid fa-bath text-blue"></i> {{$unit->unitType->bathrooms}} 
+                                @if ($unit->unitType->bathrooms > 1)
                                     <span class="fw-light">{{__('Baños')}}</span>
                                 @else
                                     <span class="fw-light">{{__('Baño')}}</span>
@@ -330,17 +173,17 @@
 
                             <div class="col-12 col-lg-3 mb-3">
                                 <i class="fa-solid fa-arrow-turn-up text-blue"></i> 
-                                <span class="fw-light">{{__('Nivel')}}</span> {{$lockoff_unit->floor}}
+                                <span class="fw-light">{{__('Nivel')}}</span> {{$unit->floor}}
                             </div>
 
                             <div class="w-100"></div>
 
                             <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-car text-blue"></i> {{$lockoff_unit->unitType->parking_spaces}} {{__('Cajón de estacionamiento')}}
+                                <i class="fa-solid fa-car text-blue"></i> {{$unit->unitType->parking_spaces}} {{__('Cajón de estacionamiento')}}
                             </div>
 
                             <div class="col-12 col-lg-5 mb-3">
-                                <i class="fa-solid fa-building text-blue"></i> {{__($lockoff_unit->section->name)}}
+                                <i class="fa-solid fa-building text-blue"></i> {{__($unit->section->name)}}
                             </div>
 
                         </div>
@@ -348,45 +191,45 @@
                         <h2 class="fs-3">{{__('Dimensiones')}}</h2>
                         <div class="row fs-5 fw-light mb-5 mb-lg-0">
                             <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-expand text-blue"></i> {{__('Interior')}}: {{$lockoff_unit->interior_const}} {{__('m²')}}
+                                <i class="fa-solid fa-expand text-blue"></i> {{__('Interior')}}: {{$unit->interior_const}} {{__('m²')}}
                             </div>
 
                             <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$lockoff_unit->exterior_const}} {{__('m²')}}
+                                <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$unit->exterior_const}} {{__('m²')}}
                             </div>
 
-                            @if($lockoff_unit->extra_exterior_const != 0)
+                            @if($unit->extra_exterior_const != 0)
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-maximize text-blue"></i> {{__('Terraza Extendida')}}: {{$lockoff_unit->extra_exterior_const}} {{__('m²')}}
+                                    <i class="fa-solid fa-maximize text-blue"></i> {{__('Terraza Extendida')}}: {{$unit->extra_exterior_const}} {{__('m²')}}
                                 </div>
                             @endif
                             
-                            @if($lockoff_unit->patio != 0)
+                            @if($unit->patio != 0)
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-maximize text-blue"></i> {{__('Patio')}}: {{$lockoff_unit->patio}} {{__('m²')}}
+                                    <i class="fa-solid fa-maximize text-blue"></i> {{__('Patio')}}: {{$unit->patio}} {{__('m²')}}
                                 </div>
                             @endif
 
-                            @if($lockoff_unit->rooftop != 0)
+                            @if($unit->rooftop != 0)
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-umbrella-beach text-blue"></i> {{__('Rooftop')}}: {{$lockoff_unit->rooftop}} {{__('m²')}}
+                                    <i class="fa-solid fa-umbrella-beach text-blue"></i> {{__('Rooftop')}}: {{$unit->rooftop}} {{__('m²')}}
                                 </div>
                             @endif
 
-                            @if($lockoff_unit->garden != 0)
+                            @if($unit->garden != 0)
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-seedling text-blue"></i> {{__('Jardín')}}: {{$lockoff_unit->garden}} {{__('m²')}}
+                                    <i class="fa-solid fa-seedling text-blue"></i> {{__('Jardín')}}: {{$unit->garden}} {{__('m²')}}
                                 </div>
                             @endif
 
-                            @if($lockoff_unit->storage != 0)
+                            @if($unit->storage != 0)
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{$lockoff_unit->storage}} {{__('m²')}}
+                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{$unit->storage}} {{__('m²')}}
                                 </div>
                             @endif
 
                             <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-house-chimney text-blue"></i> {{__('Total')}}: {{$lockoff_unit->const_total}} {{__('m²')}}
+                                <i class="fa-solid fa-house-chimney text-blue"></i> {{__('Total')}}: {{$unit->const_total}} {{__('m²')}}
                             </div>
                         </div>
 
@@ -394,13 +237,13 @@
 
                     <div class="col-12 col-lg-4 align-self-center text-center position-relative order-2 order-lg-3 mb-5 mb-lg-0">
 
-                        @if ($lockoff_unit->price != 0 and $lockoff_unit->status == 'Disponible')
+                        @if ($unit->price != 0 and $unit->status == 'Disponible')
 
                             <div class="badge {{$badgeBg}} rounded-pill mb-2 fs-5 fw-light d-none d-lg-inline-block">
-                                {{__($lockoff_unit->status)}}
+                                {{__($unit->status)}}
                             </div>
 
-                            <h3 class="fs-1 text-center mb-0">+ ${{ number_format($lockoff_unit->price) }} {{$lockoff_unit->currency}}</h3>
+                            <h3 class="fs-1 text-center mb-0">${{ number_format($unit->price) }} {{$unit->currency}}</h3>
                             <div class="fs-6 mb-2 text-center">{{__('El precio incluye 4% de Descuento')}}</div>
                         @endif
 
@@ -413,15 +256,199 @@
                 </div>
 
                 @php
-                    $lockoff_blueprints = $lockoff_unit->unitType->getMedia('blueprints')
+                    $blueprints = $unit->unitType->getMedia('blueprints');
+                @endphp
+
+                {{-- Planos --}}
+                @if ( count($blueprints) > 0)
+                    <div class="row justify-content-evenly mb-6 bg-line-blue">
+                        <div class="col-12 col-lg-10 col-xxl-7">
+
+                            <h3 class="fs-2 text-center mb-4">{{__('Planos de la unidad')}}</h3>
+                            
+                            <img src="{{ $blueprints[0]->getUrl('large') }}" alt="Planos de la unidad {{$unit->name}} de Espacio Marina & Golf" class="w-100" data-fancybox="blueprints">
+                            <div class="my-2 text-center px-3 fs-5">{{$unit->unitType->name}}</div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+        @endif
+
+
+        @if ($unit->lockoff)
+            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                @php
+                    $lockoff_unit = $unit->lockoff;
+
+                    if($lockoff_unit->status == 'Disponible'){
+                        $badgeBg = 'bg-success';
+                        $textColor = 'text-success';
+                    }elseif($lockoff_unit->status == 'Apartada'){
+                        $badgeBg = 'bg-warning';
+                        $textColor = 'text-warning';
+                    }
+                    else{
+                        $badgeBg = 'bg-danger';
+                        $textColor = 'text-danger';
+                    }
+                @endphp
+
+                <div class="row justify-content-evenly mb-6">
+
+                    <div class="col-12 col-lg-11 px-4 px-lg-0 order-1 order-lg-1 text-center text-lg-start mb-0 mb-lg-4">
+
+                        <div class="{{$textColor}} mb-2 fs-5 fw-light d-inline-block d-lg-none">
+                            {{__($lockoff_unit->status)}}
+                        </div>
+
+                        <h1 class="mb-1">
+                            {{__('Unidad')}} {{$unit->name}} + {{$lockoff_unit->name}}
+                        </h1>
+
+                        <div class="fs-4 fw-light text-secondary mb-1 mb-lg-4">{{__('Lockoff')}}: 2 {{__('recámaras')}} ({{$lockoff_unit->unitType->name}} & {{$unit->unitType->name}})</div>
+                    </div>
+
+                    <div class="col-12 col-lg-7 px-4 px-lg-4 order-3 order-lg-2">
+                        
+                        <h2 class="fs-3">{{__('Características')}}</h2>
+
+                        @php
+                            $bathrooms = $unit->unitType->bathrooms + $lockoff_unit->unitType->bathrooms;
+                        @endphp
+
+                        <div class="row mb-3 fs-5">
+
+                            <div class="col-12 col-lg-3 mb-3">
+                                <i class="fa-solid fa-bed text-blue"></i> 
+                                2 <span class="fw-light">{{__('Recámaras')}}</span> 
+                            </div>
+
+                            <div class="col-12 col-lg-3 mb-3">
+                                <i class="fa-solid fa-bath text-blue"></i> {{$bathrooms}} <span class="fw-light">{{__('Baños')}}</span>
+                            </div>
+
+                            <div class="col-12 col-lg-3 mb-3">
+                                <i class="fa-solid fa-arrow-turn-up text-blue"></i> 
+                                <span class="fw-light">{{__('Nivel')}}</span> {{$lockoff_unit->floor}}
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col-12 col-lg-4 mb-3">
+                                <i class="fa-solid fa-car text-blue"></i> 2 {{__('Cajones de estacionamiento')}}
+                            </div>
+
+                            <div class="col-12 col-lg-5 mb-3">
+                                <i class="fa-solid fa-building text-blue"></i> {{__($lockoff_unit->section->name)}}
+                            </div>
+
+                        </div>
+
+
+                        <h2 class="fs-3">{{__('Dimensiones')}}</h2>
+
+                        @php
+                            $interior = $lockoff_unit->interior_const + $unit->interior_const;
+                            $exterior = $lockoff_unit->exterior_const + $unit->exterior_const;
+                            $const_total = $lockoff_unit->const_total +$unit->const_total;
+                        @endphp
+
+                        <div class="row fs-5 fw-light mb-5 mb-lg-0">
+                            <div class="col-12 col-lg-4 mb-3">
+                                <i class="fa-solid fa-expand text-blue"></i> {{__('Interior')}}: {{$interior}} {{__('m²')}}
+                            </div>
+
+                            <div class="col-12 col-lg-4 mb-3">
+                                <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$exterior}} {{__('m²')}}
+                            </div>
+
+                            @if($lockoff_unit->extra_exterior_const != 0 or $unit->extra_exterior_const != 0)
+                               @php
+                                   $extra_exterior_const = $lockoff_unit->extra_exterior_const + $unit->extra_exterior_const;
+                               @endphp
+
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-maximize text-blue"></i> {{__('Terraza Extendida')}}: {{$extra_exterior_const}} {{__('m²')}}
+                                </div>
+                            @endif
+                            
+                            @if($lockoff_unit->patio != 0 or $unit->patio != 0)
+                               @php
+                                   $patio = $lockoff_unit->patio + $unit->patio;
+                               @endphp 
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-maximize text-blue"></i> {{__('Patio')}}: {{$patio}} {{__('m²')}}
+                                </div>
+                            @endif
+
+                            @if($lockoff_unit->rooftop != 0 or $unit->rooftop != 0)
+                                @php
+                                    $rooftop = $lockoff_unit->rooftop + $unit->rooftop;
+                                @endphp
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-umbrella-beach text-blue"></i> {{__('Rooftop')}}: {{$rooftop}} {{__('m²')}}
+                                </div>
+                            @endif
+
+                            @if($lockoff_unit->garden != 0 or $unit->garden != 0)
+                                @php
+                                    $garden = $lockoff_unit->garden + $unit->garden;
+                                @endphp
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-seedling text-blue"></i> {{__('Jardín')}}: {{$garden}} {{__('m²')}}
+                                </div>
+                            @endif
+
+                            @if($lockoff_unit->storage != 0 or $unit->storage != 0)
+                                @php
+                                    $storage = $lockoff_unit->storage + $unit->storage;
+                                @endphp
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{$storage}} {{__('m²')}}
+                                </div>
+                            @endif
+
+                            <div class="col-12 col-lg-4 mb-3">
+                                <i class="fa-solid fa-house-chimney text-blue"></i> {{__('Total')}}: {{$const_total}} {{__('m²')}}
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-lg-4 align-self-center text-center position-relative order-2 order-lg-3 mb-5 mb-lg-0">
+
+                        @if ($lockoff_unit->price != 0 and $lockoff_unit->status == 'Disponible' and $unit->status == 'Disponible' and $unit->currency == $lockoff_unit->currency)
+
+                            <div class="badge {{$badgeBg}} rounded-pill mb-2 fs-5 fw-light d-none d-lg-inline-block">
+                                {{__($lockoff_unit->status)}}
+                            </div>
+
+                            @php
+                                $lockoff_price = $unit->price + $lockoff_unit->price;
+                            @endphp
+
+                            <h3 class="fs-1 text-center mb-0">${{ number_format($lockoff_price) }} {{$lockoff_unit->currency}}</h3>
+                            <div class="fs-6 mb-2 text-center">{{__('El precio incluye 4% de Descuento')}}</div>
+                        @endif
+
+                        <div class="fs-5 mb-1 d-none d-lg-block">{{__('¿Necesitas más información?')}}</div>
+                        <a href="#contact" class="btn btn-blue d-inline-block shadow rounded-2">
+                            {{ __('Contactar a un asesor') }}
+                        </a>
+                    </div>
+                </div>
+
+                @php
+                    $lockoff_blueprints = $lockoff_unit->unitType->getMedia('blueprints');
+                    $blueprints = $unit->unitType->getMedia('blueprints');
                 @endphp
 
                 {{-- Planos --}}
                 @if ( count($lockoff_blueprints) > 0)
-                    <div class="row justify-content-evenly mb-5">
-                        <div class="col-12 col-lg-11 col-xxl-8">
+                    <div class="row justify-content-evenly mb-5 bg-line-blue">
+                        <div class="col-12 col-lg-10 col-xxl-7">
 
-                            <h3 class="fs-2 text-center text-lg-start mb-4">{{__('Planos de la unidad')}}</h3>
+                            <h3 class="fs-2 text-center text-lg-start mb-4">{{__('Planos de ambas unidades')}}</h3>
                             
                             <img src="{{ $lockoff_blueprints[0]->getUrl('large') }}" alt="Planos de la unidad {{$lockoff_unit->name}} de Espacio Marina & Golf" class="w-100" data-fancybox="lockoff-blueprints">
                             <div class="my-2 text-center px-3 fs-5">{{$lockoff_unit->unitType->name}}</div>
@@ -429,10 +456,22 @@
                     </div>
                 @endif
 
-            </div>
-        </div>
+                {{-- Planos --}}
+                @if ( count($blueprints) > 0)
+                    <div class="row justify-content-evenly mb-6 bg-line-blue">
+                        <div class="col-12 col-lg-10 col-xxl-7">
+                            <img src="{{ $blueprints[0]->getUrl('large') }}" alt="Planos de la unidad {{$unit->name}} de Espacio Marina & Golf" class="w-100" data-fancybox="blueprints">
+                            <div class="my-2 text-center px-3 fs-5">{{$unit->unitType->name}}</div>
+                        </div>
+                    </div>
+                @endif
 
-    @endif
+            </div>
+
+        @endif
+
+    </div>
+    
 
     <div class="fs-7 text-secondary text-center mt-6">{{__('Las imagenes son con fines ilustrativos. Precios y dimensiones pueden cambiar sin previo aviso.')}}</div>
 

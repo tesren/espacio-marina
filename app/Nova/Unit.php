@@ -142,6 +142,20 @@ class Unit extends Resource
 
             BelongsTo::make('Lockoff', 'lockoff', Unit::class)->withoutTrashed()->nullable()->hideFromIndex()->help('Selecciona la unidad con la que se puede hacer Lockoff')->searchable(),
 
+            Boolean::make('Lockoff estricto', 'lockoff_type')->help('Activa esta casilla si la unidad solo se puede vender en Lockoff')->hideFromIndex()->dependsOn(
+                ['lockoff'],
+                function ( Boolean $field, NovaRequest $request, FormData $formData) {
+
+                    if($formData->lockoff != null){
+                        $field->show();
+                    }
+                    else{
+                        $field->hide();
+                    }
+
+                }
+            ),
+
             Panel::make(__('Medidas'), $this->sizesFields()),
 
             HasMany::make(__('Clientes que Guardaron esta Unidad'), 'users', User::class),

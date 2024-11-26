@@ -57,7 +57,9 @@ class SearchPage extends Component
                 break;
 
                 case 2:
-                    $units = $units->where('unit_type_id', 9 );
+                    $units = $units->where(function($query) {
+                        $query->where('unit_type_id', 9)->orWhere('lockoff_id', '!=', 0);
+                    });                
                 break;
 
                 case 3:
