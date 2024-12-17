@@ -67,7 +67,7 @@ class SearchPage extends Component
                 break;
 
                 case 10:
-                    $units = $units->whereIn('unit_type_id', [3,4,11,12,13,14,15] );
+                    $units = $units->whereIn('unit_type_id', [3,4,11,12,13,14,15] )->where('lockoff_type', 0);
                 break;
 
             }

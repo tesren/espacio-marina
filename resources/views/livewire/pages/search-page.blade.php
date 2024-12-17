@@ -98,7 +98,7 @@
                             <select class="form-select" id="min_price" wire:model="min_price" aria-label="{{__('Precio min.')}}">
                                 <option value="1">{{__('Sin mínimo')}}</option>
                                 @php
-                                    $minPriceStart = 3000000;
+                                    $minPriceStart = 5000000;
                                     $maxPrice = 15000000;
                                 @endphp
                                 @for($price = $minPriceStart; $price <= $maxPrice; $price += 1000000)
@@ -112,7 +112,7 @@
                             <select class="form-select" id="max_price" wire:model="max_price" aria-label="{{__('Precio max.')}}">
                                 <option value="9999999999">{{__('Sin máximo')}}</option>
                                 @php
-                                    $maxPriceStart = 4000000;
+                                    $maxPriceStart = 6000000;
                                     $maxPrice = 16000000;
                                 @endphp
                                 @for($price = $maxPriceStart; $price <= $maxPrice; $price += 1000000)
@@ -169,29 +169,61 @@
 
                                 <td class="{{$badgeBg}} text-light text-center fw-bold">{{ $unit->name }}</td>
                                 <td class="text-center">{{ $unit->floor }}</td>
-                                <td class="d-none d-lg-table-cell"> {{ $unit->unitType->name }}</td>
+
+
+                                <td class="d-none d-lg-table-cell">
+                                    @if ( isset($unit->lockoff) and $unit->lockoff_type == 1 )
+                                        {{$unit->unitType->name.' & '.$unit->lockoff->unitType->name}}
+                                    @else
+                                        {{ $unit->unitType->name }}
+                                    @endif
+                                </td>
 
                                 <td class="text-center">
                                     @if ($unit->unitType->bedrooms == 0)
+                                        @if ( isset($unit->lockoff) and $unit->lockoff->status == 'Disponible' )
+                                            (Lockoff) {{$unit->lockoff->unitType->bedrooms.' + ' }}
+                                        @endif
+
                                         {{__('Loft')}}
-                                        @if ( isset($unit->lockoff) and $unit->lockoff->status == 'Disponible' )
-                                            (Lockoff {{__('Disponible')}})
-                                        @endif
+                                        
                                     @else
-                                        {{ $unit->unitType->bedrooms }}
+
                                         @if ( isset($unit->lockoff) and $unit->lockoff->status == 'Disponible' )
-                                            (Lockoff {{__('Disponible')}})
+                                            (Lockoff)
                                         @endif
+
+                                        {{ $unit->unitType->bedrooms }}
+                                        
                                     @endif
                                 </td>
 
                                 <td class="d-none d-lg-table-cell">{{ $unit->section->tower_name }}</td>
                                 <td class="d-none d-lg-table-cell">{{ $unit->section->view }}</td>
 
-                                <td>{{ $unit->const_total }} </td>
+                                <td class="text-center">
+                                    @if ( isset($unit->lockoff) and $unit->lockoff_type == 1 )
+                                        {{$unit->const_total + $unit->lockoff->const_total}}
+                                    @else
+                                        {{ $unit->const_total }} 
+                                    @endif
+                                </td>
+
                                 <td>
                                     @if ($unit->price != 0 and $unit->status == 'Disponible')
-                                        ${{ number_format($unit->price) }} {{$unit->currency}}
+
+                                        @if ( isset($unit->lockoff) and $unit->lockoff_type == 1 )
+
+                                            @php
+                                                $lockoff_price = $unit->price + $unit->lockoff->price;
+                                            @endphp
+
+                                            ${{ number_format($lockoff_price) }} {{$unit->currency}}
+                                            
+                                        @else
+                                            ${{ number_format($unit->price) }} {{$unit->currency}}
+                                        @endif
+                                        
                                     @endif
                                 </td>
                                 <td>
