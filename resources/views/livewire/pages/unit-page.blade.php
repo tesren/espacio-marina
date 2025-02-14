@@ -91,14 +91,15 @@
             <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link fs-4" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
+                    <button class="nav-link fs-4 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
                         {{__('Unidad')}} {{$unit->name}}
                     </button>
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link fs-4 active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
-                        {{__('Unidad')}} {{$unit->name}} + {{$unit->lockoff->name}}
+                    <button class="nav-link fs-4 d-flex" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+                        <div>{{__('Unidad')}} {{$unit->name}} + {{$unit->lockoff->name}}</div>
+                        <div class="badge bg-success fs-6 fw-light align-self-center ms-2 d-none d-lg-block">{{__('Oportunidad de Lockoff')}}</div>
                     </button>
                 </li>
 
@@ -109,7 +110,7 @@
     <div class="tab-content @if($unit->lockoff) bg-light @endif py-5" id="myTabContent">
 
         @if ($unit->lockoff_type == '0')
-            <div class="tab-pane fade @if($unit->lockoff) @else show active @endif" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                 {{-- Información --}}
                 <div class="row justify-content-evenly mb-6">
                         
@@ -276,7 +277,7 @@
 
 
         @if ($unit->lockoff)
-            <div class="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+            <div class="tab-pane fade @if($unit->lockoff_type == '1') show active @endif" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 @php
                     $lockoff_unit = $unit->lockoff;
 

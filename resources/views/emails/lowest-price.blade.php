@@ -27,6 +27,11 @@
 
         <p>Unidad: {{$unit->name}} - {{$unit->section->name}}</p>
        
+        @if ($unit->lockoff_type != 0 and $unit->lockoff_id != 0)
+            <p>Esta unidad tiene lockoff estricto con la unidad {{$unit->lockoff->name}}</p>
+            <p>Precio sin descuento: <strong>${{ number_format($unit->lockoff->price) }} {{$unit->lockoff->currency}}</strong></p>
+            <p>Total: ${{ number_format( $unit->price + $unit->lockoff->price ) }} {{$unit->currency}}</p>
+        @endif
     
     </body>
 
