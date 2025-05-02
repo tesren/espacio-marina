@@ -5,7 +5,6 @@ namespace App\Nova;
 use App\Nova\View;
 use App\Nova\Shape;
 use Laravel\Nova\Panel;
-use App\Models\UnitType as TypeUnit;
 use App\Nova\PaymentPlan;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
@@ -22,7 +21,9 @@ use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\FormData;
 use App\Nova\Actions\ChangeStatus;
 use Laravel\Nova\Fields\BelongsTo;
+use App\Models\UnitType as TypeUnit;
 use App\Nova\Actions\ChangeUnitView;
+use App\Nova\Actions\SyncUnitSupabase;
 use Laravel\Nova\Fields\BelongsToMany;
 use App\Nova\Actions\AssignPaymentPlan;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -295,6 +296,7 @@ class Unit extends Resource
         return [
             new AssignPaymentPlan,
             new ChangeStatus,
+            new SyncUnitSupabase,
         ];
     }
 }

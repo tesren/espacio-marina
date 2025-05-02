@@ -225,7 +225,7 @@
 
                             @if($unit->storage != 0)
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{$unit->storage}} {{__('m²')}}
+                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{__('Si')}} {{-- {{$unit->storage}} {{__('m²')}} --}}
                                 </div>
                             @endif
 
@@ -405,7 +405,7 @@
                                     $storage = $lockoff_unit->storage + $unit->storage;
                                 @endphp
                                 <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{$storage}} {{__('m²')}}
+                                    <i class="fa-solid fa-warehouse text-blue"></i> {{__('Bodega')}}: {{__('Si')}} {{-- {{$storage}} {{__('m²')}} --}}
                                 </div>
                             @endif
 
