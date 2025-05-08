@@ -27,7 +27,7 @@ class UnitObserver
     {
         //SUPABASE
         
-        $MapUrl = 'https://es.foursquare.com/v/espacio-marina--golf/663b976b4b4967343a860498';
+        $MapUrl = 'https://maps.app.goo.gl/jW2hXoWaQzJLF8Rd6';
 
 
         $text = "Condominio {$unit->name}, {$unit->section->name}: {$unit->status} en Espacio Marina & Golf. ";
@@ -60,7 +60,7 @@ class UnitObserver
         $lineCount = substr_count($text, "\n");
 
 
-        Http::withBasicAuth($this->n8nUser, $this->n8nPass)->post('https://n8n.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
+        Http::withBasicAuth($this->n8nUser, $this->n8nPass)->post('https://cloud.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
             'unit_id' => $unit->id,
             'operation_type' => 'insert',
             'property_type' => 'unit',
@@ -126,7 +126,7 @@ class UnitObserver
 
         //SUPABASE
         
-        $MapUrl = 'https://es.foursquare.com/v/espacio-marina--golf/663b976b4b4967343a860498';
+        $MapUrl = 'https://maps.app.goo.gl/jW2hXoWaQzJLF8Rd6';
 
 
         $text = "Condominio {$unit->name}, {$unit->section->name}: {$unit->status} en Espacio Marina & Golf. ";
@@ -159,7 +159,7 @@ class UnitObserver
         $lineCount = substr_count($text, "\n");
 
 
-        Http::withBasicAuth($this->n8nUser, $this->n8nPass)->post('https://n8n.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
+        Http::withBasicAuth($this->n8nUser, $this->n8nPass)->post('https://cloud.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
             'unit_id' => $unit->id,
             'operation_type' => 'update',
             'property_type' => 'unit',
@@ -193,7 +193,7 @@ class UnitObserver
     {
           //SUPABASE
         
-          $MapUrl = 'https://es.foursquare.com/v/espacio-marina--golf/663b976b4b4967343a860498';
+          $MapUrl = 'https://maps.app.goo.gl/jW2hXoWaQzJLF8Rd6';
 
 
           $text = "Condominio {$unit->name}, no disponible, {$unit->status} en Espacio Marina & Golf. ";
@@ -226,7 +226,7 @@ class UnitObserver
           $lineCount = substr_count($text, "\n");
   
   
-          Http::withBasicAuth($this->n8nUser, $this->n8nPass)->post('https://n8n.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
+          Http::withBasicAuth($this->n8nUser, $this->n8nPass)->post('https://cloud.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
               'unit_id' => $unit->id,
               'operation_type' => 'update',
               'property_type' => 'unit',

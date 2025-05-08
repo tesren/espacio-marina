@@ -21,6 +21,9 @@ class ContactPage extends Component
     #[Validate('required')] 
     public $email = '';
 
+    #[Validate('required')] 
+    public $contact_method = '';
+
     public $phone = '';
     public $message = '';
     public $url = '';
@@ -48,6 +51,7 @@ class ContactPage extends Component
         $msg->name = $this->full_name;
         $msg->email = $this->email;
         $msg->phone = $this->phone;
+        $msg->method = $this->contact_method;
         $msg->content = $this->message;
         $msg->url = $this->url;
 
@@ -65,28 +69,29 @@ class ContactPage extends Component
             $lang = 'Inglés';
         }
 
-         //Envíamos webhook
-         $webhookUrl = 'https://n8n.punto401.com/webhook/c7277fea-e8df-41b6-bbae-a3c66cbf77d5';
+        //Envíamos webhook
+        $webhookUrl = 'https://cloud.punto401.com/webhook/c7277fea-e8df-41b6-bbae-a3c66cbf77d5';
 
-         // Datos que deseas enviar en el cuerpo de la solicitud
-         $data = [
-             'name' => $msg->name,
-             'email' => $msg->email,
-             'phone' => $msg->phone,
-             'url' => $msg->url,
-             'content' => $msg->content,
-             'interest' => 'Condominios',
-             'development' => 'Espacio Marina',
-             'lang' => $lang,
-             'type'  => $type,
-             'created_at' => $msg->created_at,
-         ];
- 
-         // Autenticación básica
-         $n8n_user = env('N8N_AUTH_USER');
-         $n8n_pass = env('N8N_AUTH_PASS');
- 
-         Http::withBasicAuth($n8n_user, $n8n_pass)->post($webhookUrl, $data);
+        // Datos que deseas enviar en el cuerpo de la solicitud
+        $data = [
+            'name' => $msg->name,
+            'email' => $msg->email,
+            'phone' => $msg->phone,
+            'url' => $msg->url,
+            'method' => $msg->method,
+            'content' => $msg->content,
+            'interest' => 'Condominios',
+            'development' => 'Espacio Marina',
+            'lang' => $lang,
+            'type'  => $type,
+            'created_at' => $msg->created_at,
+        ];
+
+        // Autenticación básica
+        $n8n_user = env('N8N_AUTH_USER');
+        $n8n_pass = env('N8N_AUTH_PASS');
+
+        Http::withBasicAuth($n8n_user, $n8n_pass)->post($webhookUrl, $data);
 
 
         $email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');

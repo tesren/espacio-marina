@@ -101,6 +101,16 @@ body{
     border-bottom: 1px solid var(--darkblue);
 }
 
+.form-select {
+    color: var(--bs-body-color);
+    background-color: transparent;
+    border-radius: 0px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid var(--darkblue);
+}
+
 .bg-line-blue {
     background-image: linear-gradient(transparent 25%, var(--blue) 25%, var(--blue) 75%, transparent 75%);
 }

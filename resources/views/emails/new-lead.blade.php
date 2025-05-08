@@ -19,6 +19,7 @@
         <p>Mensaje de: <strong>{{$msg->name}}</strong></p>
         <p>Correo: <strong>{{$msg->email}}</strong></p>
         <p>Telêfono: <strong>{{$msg->phone ?? 'Sin especificar'}}</strong></p>
+        <p>Preferencia de contacto: <strong>{{ $msg->method ?? 'Sin especificar' }}</strong></p>
     
         <p>Contenido: <strong>{{$msg->content ?? 'Sin Contenido'}}</strong></p> <br>
     

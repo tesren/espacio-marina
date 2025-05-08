@@ -32,7 +32,7 @@ class SyncUnitSupabase extends Action
             $unit = Unit::find($model->id);
             
             // Crear el enlace de Google Maps
-            $MapUrl = 'https://es.foursquare.com/v/espacio-marina--golf/663b976b4b4967343a860498';
+            $MapUrl = 'https://maps.app.goo.gl/jW2hXoWaQzJLF8Rd6';
 
 
             $text = "Condominio {$unit->name}, {$unit->section->name}: {$unit->status} en Espacio Marina & Golf. ";
@@ -59,7 +59,7 @@ class SyncUnitSupabase extends Action
             $text .= "Ubicado dentro de Espacio Marina & Golf, en Avenida Paseo de la Marina Norte 620, Marina Vallarta, Puerto Vallarta, Jalisco. ";
             $text .= "Ver ubicación: {$MapUrl}. ";
             $text .= "Ver más detalles en el sitio web: " . route('es.pages.unit', ['name' => $unit->name]);
-            $text .= "Invierte en este desarrollo inmobiliario único, con un diseño arquitectónico y acabados de primera clase, a solo 400 metros de la playa y a 5 minutos del aeropuerto. .  ";
+            $text .= " Invierte en este desarrollo inmobiliario único, con un diseño arquitectónico y acabados de primera clase, a solo 400 metros de la playa y a 5 minutos del aeropuerto. .  ";
             $text .= "Fecha de creación: {$unit->created_at}. Última actualización: {$unit->updated_at}.";
 
             $lineCount = substr_count($text, "\n");
@@ -67,7 +67,7 @@ class SyncUnitSupabase extends Action
             $n8n_user = env('N8N_AUTH_USER');
             $n8n_pass = env('N8N_AUTH_PASS');
 
-            Http::withBasicAuth($n8n_user, $n8n_pass)->post('https://n8n.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
+            Http::withBasicAuth($n8n_user, $n8n_pass)->post('https://cloud.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
                 'unit_id' => $unit->id,
                 'operation_type' => $fields->operation_type,
                 'property_type' => 'unit',
