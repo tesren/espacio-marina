@@ -229,8 +229,17 @@
                                 </div>
                             @endif
 
+                            @php
+                                if( isset($unit->storage ) ){
+                                    $const_total = $unit->const_total - $unit->storage;
+                                }
+                                else{
+                                    $const_total = $unit->const_total;
+                                }
+                            @endphp
+
                             <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-house-chimney text-blue"></i> {{__('Total')}}: {{$unit->const_total}} {{__('m²')}}
+                                <i class="fa-solid fa-house-chimney text-blue"></i> {{__('Total')}}: {{$const_total}} {{__('m²')}}
                             </div>
                         </div>
 

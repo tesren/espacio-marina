@@ -55,7 +55,7 @@
 
     </div>
 
-    <div class="bg-blue p-3 text-center">
+    <div class="bg-darkblue p-3 text-center">
         <i class="fa-regular fa-copyright"></i> Copyright 2024 {{__('Todos los derechos reservados')}} | <a href="{{ route('pages.privacy') }}" wire:navigate class="link-light fw-light">{{__('Aviso de Privacidad')}}</a>
         | 
        <a href="https://punto401.com" class="link-light fw-light text-decoration-none">

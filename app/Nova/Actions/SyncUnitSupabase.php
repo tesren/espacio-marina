@@ -58,7 +58,7 @@ class SyncUnitSupabase extends Action
             $text .= "Precio: $" . number_format($unit->price, 2) . " {$unit->currency}. ";
             $text .= "Ubicado dentro de Espacio Marina & Golf, en Avenida Paseo de la Marina Norte 620, Marina Vallarta, Puerto Vallarta, Jalisco. ";
             $text .= "Ver ubicación: {$MapUrl}. ";
-            $text .= "Ver más detalles en el sitio web: " . route('es.pages.unit', ['name' => $unit->name]);
+            $text .= "Ver más detalles en el sitio web: " . route('es.pages.unit', ['name' => $unit->name])." ";
             $text .= " Invierte en este desarrollo inmobiliario único, con un diseño arquitectónico y acabados de primera clase, a solo 400 metros de la playa y a 5 minutos del aeropuerto. .  ";
             $text .= "Fecha de creación: {$unit->created_at}. Última actualización: {$unit->updated_at}.";
 

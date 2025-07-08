@@ -250,6 +250,18 @@ body{
     color: #F1F2F5 !important;
 }
 
+.btn-green{
+    background-color: #075e54;
+    color: white;
+    border-radius: 0;
+}
+
+.btn-green:hover, .btn-green:active{
+    background-color: rgb(9, 97, 73) !important;
+    color: white !important;
+    transition: 0.3s;
+}
+
 .amenities-bg{
     background: transparent;
 }

@@ -29,7 +29,7 @@
 
         <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
 
-        <link rel="stylesheet" href="{{ asset('css/public-styles-v3.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/public-styles-v4.css') }}">
 
         @include('components.favicon')
 
@@ -37,7 +37,7 @@
         
     </head>
 
-    <body>
+    <body class="position-relative">
        
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TGC958JV"
@@ -51,12 +51,10 @@
             <div style="margin-top: 78px;">{{ $slot }}</div>
         </main>
 
-
-        @include('livewire.components.whatsapp-btn')
-
         {{-- Footer --}}
         @include('livewire.components.public-footer')
 
+        @include('livewire.components.whatsapp-btn')
 
         @vite(['resources/js/app.js'])
 
