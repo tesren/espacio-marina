@@ -73,7 +73,7 @@
                             </li>
                         @endif
 
-                        <li class="nav-item dropdown d-block d-lg-none">
+                        <li class="nav-item dropdown d-block d-lg-none mb-2 mb-lg-0">
 
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user me-2"></i>{{__('Iniciar Sesión')}}
@@ -92,12 +92,10 @@
                         
                     </ul>
 
-                    <hr class="d-block d-lg-none my-4">
-
                     {{-- Solo en escritorio --}}
-                    <div class="text-center align-self-center justify-content-center d-none d-lg-flex">
+                    <div class="text-center align-self-center justify-content-start justify-content-lg-center d-flex">
                         
-                        <div class="nav-item dropdown fs-5 me-4">
+                        <div class="nav-item dropdown fs-5 me-4 d-none d-lg-block">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user"></i>
                             </a>
@@ -121,13 +119,13 @@
                         @if ($lang == 'en')
                             @if($route != 'en.pages.unit' and $route != 'es.livewire.update')
 
-                                <a href="{{$url = route($route, request()->query(), true, 'es')}}" wire:navigate class="d-block align-self-center me-3" title="{{__('Cambiar idioma')}}">
-                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px">
+                                <a href="{{$url = route($route, request()->query(), true, 'es')}}" wire:navigate class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}">
+                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
                             @else
 
-                                <a class="d-block align-self-center me-3" title="{{__('Cambiar idioma')}}" wire:navigate href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'es');}}">
-                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px">
+                                <a class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}" wire:navigate href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'es');}}">
+                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
 
                             @endif
@@ -135,20 +133,22 @@
                         @else
                             @if($route != 'es.pages.unit' and $route != 'es.livewire.update')
 
-                                <a href="{{$url = route($route, request()->query(), true, 'en')}}" wire:navigate class="d-block align-self-center me-3" title="{{__('Cambiar idioma')}}">
-                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma ')}} " width="30px">
+                                <a href="{{$url = route($route, request()->query(), true, 'en')}}" wire:navigate class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}">
+                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma ')}} " width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
 
                             @else
                                 
-                                <a class="d-block align-self-center me-3" title="{{__('Cambiar idioma')}}" wire:navigate href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'en');}}">
-                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px">
+                                <a class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}" wire:navigate href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'en');}}">
+                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
 
                             @endif
                         @endif
 
                     </div>
+
+                    <hr class="d-block d-lg-none my-4">
 
                     {{-- Redes sociales solo en móvil --}}
                     <div class="text-center fs-4 d-block d-lg-none">

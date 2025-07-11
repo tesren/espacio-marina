@@ -71,7 +71,7 @@ class ContactForm extends Component
         }
 
         //Envíamos webhook
-        $webhookUrl = 'https://cloud.punto401.com/webhook/c7277fea-e8df-41b6-bbae-a3c66cbf77d5';
+        $webhookUrl = 'https://cloud.punto401.com/webhook/7bed19ac-6acc-4233-8ca5-b6d72cdbf680';
 
         // Datos que deseas enviar en el cuerpo de la solicitud
         $data = [
@@ -95,11 +95,11 @@ class ContactForm extends Component
         Http::withBasicAuth($n8n_user, $n8n_pass)->post($webhookUrl, $data);
 
 
-        $email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');
+        //$email = Mail::to('info@domusvallarta.com')->bcc('ventas@punto401.com');
     
         //$email = Mail::to('erick@punto401.com');
         
-        $email->send(new NewLead($msg));
+        //$email->send(new NewLead($msg));
 
         session()->flash('message', 'Mensaje enviado existosamente');
 

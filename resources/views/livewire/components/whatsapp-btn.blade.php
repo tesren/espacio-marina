@@ -22,7 +22,7 @@
             </div>
 
             <div class="col-5 align-self-center">
-                <a class="btn btn-green w-100 fs-6" href="https://wa.me/5213322005523?text={{__("Hola, vengo del sitio web de Azulejos Grand")}}" target="_blank" rel="noopener noreferrer">
+                <a class="btn btn-green w-100 fs-6" href="https://wa.me/5213322005523?text={{__("Hola, vengo del sitio web de Espacio Marina")}}" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
                 </a>
             </div>
