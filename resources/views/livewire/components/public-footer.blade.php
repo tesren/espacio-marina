@@ -33,8 +33,8 @@
                     <i class="fa-solid fa-envelope"></i> info@domusvallarta.com
                 </a>
                 
-                <a href="tel:+523322005523" class="d-block link-light text-decoration-none mb-2">
-                    <i class="fa-solid fa-phone"></i> +52 332 200 5523
+                <a href="tel:+52{{env('CONTACT_NUMBER')}}" class="d-block link-light text-decoration-none mb-2">
+                    <i class="fa-solid fa-phone"></i> +52 {{env('DISPLAY_NUMBER')}}
                 </a>
 
             @endif
