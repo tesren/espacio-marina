@@ -64,6 +64,8 @@ Route::localized(function () {
 
 Route::get('/espacio-optimize', function() {
     Artisan::call('optimize');
+    Artisan::call('view:cache');
+
     return ('Optimizado');
 });
 

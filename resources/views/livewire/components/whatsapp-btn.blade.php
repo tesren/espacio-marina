@@ -4,7 +4,7 @@
 
 @if ( $contact != 'no')
     {{-- Botón de WhatsApp --}}
-    <a id="whatsapp" class="shadow d-none d-lg-block" href="https://wa.me/52{{env('CONTACT_NUMBER')}}?text={{ urlencode(__('Hola, vengo del sitio web de Espacio Marina')) }}" target="_blank" rel="noopener noreferrer"
+    <a id="whatsapp" class="shadow d-none d-lg-block" href="https://wa.me/52{{config('domus.whatsapp_number') }}?text={{ urlencode(__('Hola, vengo del sitio web de Espacio Marina')) }}" target="_blank" rel="noopener noreferrer"
         class="text-decoration-none position-fixed d-flex justify-content-center shadow-4 rounded-circle text-white z-3 shadow-3" 
         data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="{{__('Envíanos un mensaje')}}">
 
@@ -22,7 +22,7 @@
             </div>
 
             <div class="col-5 align-self-center">
-                <a class="btn btn-green w-100 fs-6" href="https://wa.me/52{{env('CONTACT_NUMBER')}}?text={{__("Hola, vengo del sitio web de Espacio Marina")}}" target="_blank" rel="noopener noreferrer">
+                <a class="btn btn-green w-100 fs-6" href="https://wa.me/52{{config('domus.whatsapp_number') }}?text={{__("Hola, vengo del sitio web de Espacio Marina")}}" target="_blank" rel="noopener noreferrer">
                     <i class="fa-brands fa-whatsapp"></i> WhatsApp
                 </a>
             </div>
