@@ -56,10 +56,6 @@ Route::localized(function () {
     Route::get(Lang::uri('/avances-de-obra'), ConstructionPage::class)->name('pages.construction');
     Route::get(Lang::uri('/aviso-de-privacidad'), PrivacyPage::class)->name('pages.privacy');
 
-    Livewire::setUpdateRoute(function ($handle) {
-        return Route::post('/livewire/update', $handle);
-    });
-
 });
 
 Route::get('/espacio-optimize', function() {

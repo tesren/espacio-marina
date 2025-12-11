@@ -23,10 +23,6 @@
 
                 <div class="offcanvas-body bg-white">
 
-                    @php
-                        $route = Route::currentRouteName();
-                    @endphp
-
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3 fs-5">
 
                         <li class="nav-item me-0 me-lg-4 d-block d-lg-none">
@@ -111,36 +107,33 @@
                             </ul>
                         </div>
 
-                        @php
-                            $route = Route::currentRouteName();
-                            $lang = app()->getLocale();
-                        @endphp
 
                         @if ($lang == 'en')
-                            @if($route != 'en.pages.unit' and $route != 'es.livewire.update')
+                            @if($route == 'en.pages.unit')
 
-                                <a href="{{$url = route($route, request()->query(), true, 'es')}}" wire:navigate class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}">
+                                <a class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}" href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'es');}}">
                                     <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
+
                             @else
 
-                                <a class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}" wire:navigate href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'es');}}">
+                                <a href="{{$url = route($route, request()->query(), true, 'es')}}" class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}">
                                     <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
 
                             @endif
                         
                         @else
-                            @if($route != 'es.pages.unit' and $route != 'es.livewire.update')
+                            @if($route == 'es.pages.unit')
 
-                                <a href="{{$url = route($route, request()->query(), true, 'en')}}" wire:navigate class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}">
-                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma ')}} " width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
+                                <a class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}" href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'en');}}">
+                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
 
                             @else
                                 
-                                <a class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}" wire:navigate href="{{$url = route('pages.unit', ['name'=>$unit_name, 'utm_campaign' => request()->query('utm_campaign'), 'utm_source' => request()->query('utm_source'), 'utm_medium' => request()->query('utm_medium')], true, 'en');}}">
-                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma')}}" width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
+                                <a href="{{$url = route($route, request()->query(), true, 'en')}}" class="d-block text-decoration-none fs-5 text-darkblue align-self-center me-3" title="{{__('Cambiar idioma')}}">
+                                    <img src="{{ asset('img/change-lang-btn.webp') }}" alt="{{__('Cambiar idioma ')}} " width="30px"> <span class="d-inline d-lg-none">{{__('Cambiar idioma')}}</span>
                                 </a>
 
                             @endif
