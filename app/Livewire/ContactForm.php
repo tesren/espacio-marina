@@ -89,8 +89,8 @@ class ContactForm extends Component
         ];
 
         // Autenticación básica
-        $n8n_user = env('N8N_AUTH_USER');
-        $n8n_pass = env('N8N_AUTH_PASS');
+        $n8nUser = config('domus.n8n_auth_user');
+        $n8nPass = config('domus.n8n_auth_pass');
 
         Http::withBasicAuth($n8n_user, $n8n_pass)->post($webhookUrl, $data);
 

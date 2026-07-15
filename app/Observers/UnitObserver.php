@@ -15,8 +15,8 @@ class UnitObserver
 
     public function __construct()
     {
-        $this->n8nUser = env('N8N_AUTH_USER');
-        $this->n8nPass = env('N8N_AUTH_PASS');
+        $this->n8nUser = config('domus.n8n_auth_user');
+        $this->n8nPass = config('domus.n8n_auth_pass');
     }
 
 

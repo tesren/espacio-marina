@@ -64,8 +64,8 @@ class SyncUnitSupabase extends Action
 
             $lineCount = substr_count($text, "\n");
 
-            $n8n_user = env('N8N_AUTH_USER');
-            $n8n_pass = env('N8N_AUTH_PASS');
+            $n8nUser = config('domus.n8n_auth_user');
+            $n8nPass = config('domus.n8n_auth_pass');
 
             Http::withBasicAuth($n8n_user, $n8n_pass)->post('https://cloud.punto401.com/webhook/f2b447a5-8042-432f-82d6-199258fcf582', [
                 'unit_id' => $unit->id,

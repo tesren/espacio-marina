@@ -195,25 +195,25 @@
                                 <i class="fa-solid fa-expand text-blue"></i> {{__('Interior')}}: {{$unit->interior_const}} {{__('m²')}}
                             </div>
 
-                            <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$unit->exterior_const}} {{__('m²')}}
-                            </div>
+                            @if($unit->exterior_const > 0 && $unit->rooftop)
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza + Rooftop')}}: {{$unit->exterior_const}} {{__('m²')}}
+                                </div>
+                            @else
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$unit->exterior_const}} {{__('m²')}}
+                                </div>
+                            @endif
 
                             @if($unit->extra_exterior_const != 0)
                                 <div class="col-12 col-lg-4 mb-3">
                                     <i class="fa-solid fa-maximize text-blue"></i> {{__('Terraza Extendida')}}: {{$unit->extra_exterior_const}} {{__('m²')}}
                                 </div>
                             @endif
-                            
+
                             @if($unit->patio != 0)
                                 <div class="col-12 col-lg-4 mb-3">
                                     <i class="fa-solid fa-maximize text-blue"></i> {{__('Patio')}}: {{$unit->patio}} {{__('m²')}}
-                                </div>
-                            @endif
-
-                            @if($unit->rooftop != 0)
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-umbrella-beach text-blue"></i> {{__('Rooftop')}}: {{$unit->rooftop}} {{__('m²')}}
                                 </div>
                             @endif
 
@@ -230,12 +230,12 @@
                             @endif
 
                             @php
-                                if( isset($unit->storage ) ){
-                                    $const_total = $unit->const_total - $unit->storage;
-                                }
-                                else{
-                                    $const_total = $unit->const_total;
-                                }
+                                $const_total =
+                                    (float) ($unit->interior_const ?? 0)
+                                    + (float) ($unit->exterior_const ?? 0)
+                                    + (float) ($unit->extra_exterior_const ?? 0)
+                                    + (float) ($unit->patio ?? 0)
+                                    + (float) ($unit->garden ?? 0);
                             @endphp
 
                             <div class="col-12 col-lg-4 mb-3">
@@ -360,7 +360,20 @@
                         @php
                             $interior = $lockoff_unit->interior_const + $unit->interior_const;
                             $exterior = $lockoff_unit->exterior_const + $unit->exterior_const;
-                            $const_total = $lockoff_unit->const_total +$unit->const_total;
+                            $const_total =
+                                (float) ($lockoff_unit->interior_const ?? 0)
+                                + (float) ($lockoff_unit->exterior_const ?? 0)
+                                + (float) ($lockoff_unit->extra_exterior_const ?? 0)
+                                + (float) ($lockoff_unit->patio ?? 0)
+                                + (float) ($lockoff_unit->garden ?? 0)
+                                + (float) ($unit->interior_const ?? 0)
+                                + (float) ($unit->exterior_const ?? 0)
+                                + (float) ($unit->extra_exterior_const ?? 0)
+                                + (float) ($unit->patio ?? 0)
+                                + (float) ($unit->garden ?? 0);
+                        @endphp
+                        @php
+                            $has_rooftop = (bool) $lockoff_unit->rooftop || (bool) $unit->rooftop;
                         @endphp
 
                         <div class="row fs-5 fw-light mb-5 mb-lg-0">
@@ -368,9 +381,15 @@
                                 <i class="fa-solid fa-expand text-blue"></i> {{__('Interior')}}: {{$interior}} {{__('m²')}}
                             </div>
 
-                            <div class="col-12 col-lg-4 mb-3">
-                                <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$exterior}} {{__('m²')}}
-                            </div>
+                            @if($exterior > 0 && $has_rooftop)
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza + Rooftop')}}: {{$exterior}} {{__('m²')}}
+                                </div>
+                            @else
+                                <div class="col-12 col-lg-4 mb-3">
+                                    <i class="fa-solid fa-people-roof text-blue"></i> {{__('Terraza Techada')}}: {{$exterior}} {{__('m²')}}
+                                </div>
+                            @endif
 
                             @if($lockoff_unit->extra_exterior_const != 0 or $unit->extra_exterior_const != 0)
                                @php
@@ -388,15 +407,6 @@
                                @endphp 
                                 <div class="col-12 col-lg-4 mb-3">
                                     <i class="fa-solid fa-maximize text-blue"></i> {{__('Patio')}}: {{$patio}} {{__('m²')}}
-                                </div>
-                            @endif
-
-                            @if($lockoff_unit->rooftop != 0 or $unit->rooftop != 0)
-                                @php
-                                    $rooftop = $lockoff_unit->rooftop + $unit->rooftop;
-                                @endphp
-                                <div class="col-12 col-lg-4 mb-3">
-                                    <i class="fa-solid fa-umbrella-beach text-blue"></i> {{__('Rooftop')}}: {{$rooftop}} {{__('m²')}}
                                 </div>
                             @endif
 

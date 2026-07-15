@@ -39,12 +39,20 @@
                     @endphp
 
                     <div class="position-relative">
-                        <img src="{{$portrait}}" class="w-100" alt="Avance de Obra Espacio Marina & Golf - {{$date}}" style="max-height: 470px; object-fit:cover;">
+                        <img src="{{$portrait}}" class="w-100" alt="Avance de Obra Virēo Living - {{$date}}" style="max-height: 470px; object-fit:cover;">
+
                         <div class="row position-absolute top-0 start-0 justify-content-center h-100">
+
                             <div class="col-12 text-center align-self-center">
-                                <a href="#construction-{{$update->id}}-1"  class="link-light" aria-label="Ver avance de obra de {{$date}}"><i class="fa-solid fa-4x fa-play"></i></a>
+                                @if ($update->video_link)
+                                    <a href="{{$update->video_link}}" data-fancybox="construction-{{$update->id}}" class="link-light" aria-label="Ver avance de obra de {{$date}}"><i class="fa-solid fa-4x fa-play"></i></a>
+                                @else
+                                    <a href="#construction-{{$update->id}}-1" class="link-light text-decoration-none fs-1" aria-label="Ver avance de obra de {{$date}}"><i class="fa-regular fa-images"></i> {{count($images)}}</a>
+                                @endif
                             </div>
+
                         </div>
+
                     </div>
 
                     <div class="card-body bg-darkblue d-flex position-relative overflow-hidden">
@@ -53,10 +61,6 @@
                         <h2 class="mb-0 lh-1 fw-light">{{$date}} <br> <span class="fs-5">{{__('Avance de Obra')}}</span> </h2>
                         
                     </div>
-
-                    @if ($update->video_link)
-                        <a href="{{$update->video_link}}" data-fancybox="construction-{{$update->id}}" class="d-none">{{__('Video de avance de obra')}} Espacio Marina & Golf - {{$date}}</a>
-                    @endif
 
                     @foreach ($images as $image)
                         <img src="{{$image->getUrl('large')}}" alt="Avance de Obra Espacio Marina & Golf - {{$date}}" class="w-100 d-none" data-fancybox="construction-{{$update->id}}">

@@ -202,10 +202,27 @@
                                 <td class="d-none d-lg-table-cell">{{ $unit->section->view }}</td>
 
                                 <td class="text-center">
+                                    @php
+                                        $unit_const_total =
+                                            (float) ($unit->interior_const ?? 0)
+                                            + (float) ($unit->exterior_const ?? 0)
+                                            + (float) ($unit->extra_exterior_const ?? 0)
+                                            + (float) ($unit->patio ?? 0)
+                                            + (float) ($unit->garden ?? 0);
+                                    @endphp
+
                                     @if ( isset($unit->lockoff) and $unit->lockoff_type == 1 )
-                                        {{$unit->const_total + $unit->lockoff->const_total}}
+                                        @php
+                                            $lockoff_const_total =
+                                                (float) ($unit->lockoff->interior_const ?? 0)
+                                                + (float) ($unit->lockoff->exterior_const ?? 0)
+                                                + (float) ($unit->lockoff->extra_exterior_const ?? 0)
+                                                + (float) ($unit->lockoff->patio ?? 0)
+                                                + (float) ($unit->lockoff->garden ?? 0);
+                                        @endphp
+                                        {{ $unit_const_total + $lockoff_const_total }}
                                     @else
-                                        {{ $unit->const_total }} 
+                                        {{ $unit_const_total }}
                                     @endif
                                 </td>
 

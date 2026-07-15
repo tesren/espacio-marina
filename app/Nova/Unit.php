@@ -187,7 +187,7 @@ class Unit extends Resource
 
                     if($formData->unitType != null){
                         $unit_type = TypeUnit::findOrFail($formData->unitType);
-                        $field->setValue($unit_type->interior_const);
+                        $field->default($unit_type->interior_const);
                     }
 
                 }
@@ -204,7 +204,7 @@ class Unit extends Resource
 
                     if($formData->unitType != null){
                         $unit_type = TypeUnit::findOrFail($formData->unitType);
-                        $field->setValue($unit_type->exterior_const);
+                        $field->default($unit_type->exterior_const);
                     }
 
                 }
@@ -222,12 +222,7 @@ class Unit extends Resource
                     return $value.' m²';
                 }
             ), 
-            Number::make('Rooftop', 'rooftop')->hideFromIndex()->placeholder('Metros cuadrados del rooftop')->min(0)->max(99999)->nullable()->step(0.01)
-            ->displayUsing(
-                function($value){
-                    return $value.' m²';
-                }
-            ),
+            Boolean::make('Rooftop', 'rooftop')->hideFromIndex()->default(false),
             Number::make(__('Jardín'), 'garden')->hideFromIndex()->placeholder('Metros cuadrados del jardín')->min(0)->max(99999)->nullable()->step(0.01)
             ->displayUsing(
                 function($value){
@@ -241,12 +236,21 @@ class Unit extends Resource
                 }
             ),
 
-            Number::make(__('Const. Total'), 'const_total')->sortable()->placeholder('Metros cuadrados totales')->min(0)->max(99999)->rules('required')->step(0.01)
+            Number::make(__('Const. Total'), function () {
+                return round(
+                    (float) ($this->interior_const ?? 0)
+                    + (float) ($this->exterior_const ?? 0)
+                    + (float) ($this->extra_exterior_const ?? 0)
+                    + (float) ($this->patio ?? 0)
+                    + (float) ($this->garden ?? 0),
+                    2
+                );
+            })->placeholder('Metros cuadrados totales')
             ->displayUsing(
                 function($value){
                     return $value.' m²';
                 }
-            ),
+            )->exceptOnForms(),
         ];
     }
 
