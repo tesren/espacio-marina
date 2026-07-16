@@ -276,6 +276,7 @@ class User extends Resource
         return [
             new Actions\SendLoginData,
             new Actions\ChangeUserLang,
+            new Actions\RevokeApiToken,
         ];
     }
 }

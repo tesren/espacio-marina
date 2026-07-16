@@ -72,6 +72,8 @@ return [
 
     'timezone' => 'America/Mexico_City',
 
+    'api_project_slug' => env('API_PROJECT_SLUG', 'espacio-marina'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

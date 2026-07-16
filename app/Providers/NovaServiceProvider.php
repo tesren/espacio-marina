@@ -8,6 +8,7 @@ use App\Nova\Shape;
 use App\Nova\Message;
 use App\Nova\Section;
 use App\Nova\UnitType;
+use App\Nova\ApiRequestLog;
 use Laravel\Nova\Nova;
 use App\Nova\PaymentPlan;
 use Laravel\Nova\Menu\Menu;
@@ -46,6 +47,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::resource(UnitType::class)->icon('collection'),     
                 MenuSection::resource(PaymentPlan::class)->icon('currency-dollar'),
                 MenuSection::resource(Message::class)->icon('inbox-in'),
+                MenuSection::resource(ApiRequestLog::class)->icon('server'),
                 MenuSection::resource(ConstructionUpdate::class)->icon('camera'),
                 MenuSection::resource(Shape::class)->icon('cube'),
 
